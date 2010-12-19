@@ -1,0 +1,212 @@
+|MemoryaddrBridge
+clk => clk.IN1
+pclk => pclk.IN2
+HREF => HREF.IN1
+VSYNC => VSYNC.IN1
+xclk <= clkdivider:clkdivider0.port1
+WEb <= memoryaddressor:menaddr.port2
+BLEb <= memoryaddressor:menaddr.port3
+BHEb <= memoryaddressor:menaddr.port4
+SRAM_address[0] <= memoryaddressor:menaddr.port5
+SRAM_address[1] <= memoryaddressor:menaddr.port5
+SRAM_address[2] <= memoryaddressor:menaddr.port5
+SRAM_address[3] <= memoryaddressor:menaddr.port5
+SRAM_address[4] <= memoryaddressor:menaddr.port5
+SRAM_address[5] <= memoryaddressor:menaddr.port5
+SRAM_address[6] <= memoryaddressor:menaddr.port5
+SRAM_address[7] <= memoryaddressor:menaddr.port5
+SRAM_address[8] <= memoryaddressor:menaddr.port5
+SRAM_address[9] <= memoryaddressor:menaddr.port5
+SRAM_address[10] <= memoryaddressor:menaddr.port5
+SRAM_address[11] <= memoryaddressor:menaddr.port5
+SRAM_address[12] <= memoryaddressor:menaddr.port5
+SRAM_address[13] <= memoryaddressor:menaddr.port5
+SRAM_address[14] <= memoryaddressor:menaddr.port5
+SRAM_address[15] <= memoryaddressor:menaddr.port5
+
+
+|MemoryaddrBridge|TimingManager:timemanager
+VSYNC => VSYNC.IN1
+HREF => HREF.IN1
+pclk => pclk.IN1
+Sig_En <= Sig_En~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|MemoryaddrBridge|TimingManager:timemanager|ByteCounter:HrefC
+ck => q[0].ALOAD
+ck => q[1].ALOAD
+ck => q[2].ALOAD
+ck => q[3].ALOAD
+ck => q[4].ALOAD
+ck => q[5].ALOAD
+ck => q[6].ALOAD
+ck => q[7].ALOAD
+res => q[0].CLK
+res => q[1].CLK
+res => q[2].CLK
+res => q[3].CLK
+res => q[4].CLK
+res => q[5].CLK
+res => q[6].CLK
+res => q[7].CLK
+Val[0] <= Val.DB_MAX_OUTPUT_PORT_TYPE
+Val[1] <= Val.DB_MAX_OUTPUT_PORT_TYPE
+Val[2] <= Val.DB_MAX_OUTPUT_PORT_TYPE
+Val[3] <= Val.DB_MAX_OUTPUT_PORT_TYPE
+Val[4] <= Val.DB_MAX_OUTPUT_PORT_TYPE
+Val[5] <= Val.DB_MAX_OUTPUT_PORT_TYPE
+Val[6] <= Val.DB_MAX_OUTPUT_PORT_TYPE
+Val[7] <= Val.DB_MAX_OUTPUT_PORT_TYPE
+enable => Val.OUTPUTSELECT
+enable => Val.OUTPUTSELECT
+enable => Val.OUTPUTSELECT
+enable => Val.OUTPUTSELECT
+enable => Val.OUTPUTSELECT
+enable => Val.OUTPUTSELECT
+enable => Val.OUTPUTSELECT
+enable => Val.OUTPUTSELECT
+
+
+|MemoryaddrBridge|TimingManager:timemanager|ByteCounter:PixC
+ck => q[0].ALOAD
+ck => q[1].ALOAD
+ck => q[2].ALOAD
+ck => q[3].ALOAD
+ck => q[4].ALOAD
+ck => q[5].ALOAD
+ck => q[6].ALOAD
+ck => q[7].ALOAD
+res => q[0].CLK
+res => q[1].CLK
+res => q[2].CLK
+res => q[3].CLK
+res => q[4].CLK
+res => q[5].CLK
+res => q[6].CLK
+res => q[7].CLK
+Val[0] <= Val.DB_MAX_OUTPUT_PORT_TYPE
+Val[1] <= Val.DB_MAX_OUTPUT_PORT_TYPE
+Val[2] <= Val.DB_MAX_OUTPUT_PORT_TYPE
+Val[3] <= Val.DB_MAX_OUTPUT_PORT_TYPE
+Val[4] <= Val.DB_MAX_OUTPUT_PORT_TYPE
+Val[5] <= Val.DB_MAX_OUTPUT_PORT_TYPE
+Val[6] <= Val.DB_MAX_OUTPUT_PORT_TYPE
+Val[7] <= Val.DB_MAX_OUTPUT_PORT_TYPE
+enable => Val.OUTPUTSELECT
+enable => Val.OUTPUTSELECT
+enable => Val.OUTPUTSELECT
+enable => Val.OUTPUTSELECT
+enable => Val.OUTPUTSELECT
+enable => Val.OUTPUTSELECT
+enable => Val.OUTPUTSELECT
+enable => Val.OUTPUTSELECT
+
+
+|MemoryaddrBridge|memoryaddressor:menaddr
+Sig_En => Sig_En.IN1
+pclk => WEb.IN1
+pclk => write_state.CLK
+WEb <= WEb.DB_MAX_OUTPUT_PORT_TYPE
+BLEb <= Sig_En.DB_MAX_OUTPUT_PORT_TYPE
+BHEb <= Sig_En.DB_MAX_OUTPUT_PORT_TYPE
+Address[0] <= Address[0].DB_MAX_OUTPUT_PORT_TYPE
+Address[1] <= Address[1].DB_MAX_OUTPUT_PORT_TYPE
+Address[2] <= Address[2].DB_MAX_OUTPUT_PORT_TYPE
+Address[3] <= Address[3].DB_MAX_OUTPUT_PORT_TYPE
+Address[4] <= Address[4].DB_MAX_OUTPUT_PORT_TYPE
+Address[5] <= Address[5].DB_MAX_OUTPUT_PORT_TYPE
+Address[6] <= Address[6].DB_MAX_OUTPUT_PORT_TYPE
+Address[7] <= Address[7].DB_MAX_OUTPUT_PORT_TYPE
+Address[8] <= Address[8].DB_MAX_OUTPUT_PORT_TYPE
+Address[9] <= Address[9].DB_MAX_OUTPUT_PORT_TYPE
+Address[10] <= Address[10].DB_MAX_OUTPUT_PORT_TYPE
+Address[11] <= Address[11].DB_MAX_OUTPUT_PORT_TYPE
+Address[12] <= Address[12].DB_MAX_OUTPUT_PORT_TYPE
+Address[13] <= Address[13].DB_MAX_OUTPUT_PORT_TYPE
+Address[14] <= Address[14].DB_MAX_OUTPUT_PORT_TYPE
+Address[15] <= Address[15].DB_MAX_OUTPUT_PORT_TYPE
+
+
+|MemoryaddrBridge|memoryaddressor:menaddr|WideCounter:w_count1
+ck => q[0].ALOAD
+ck => q[1].ALOAD
+ck => q[2].ALOAD
+ck => q[3].ALOAD
+ck => q[4].ALOAD
+ck => q[5].ALOAD
+ck => q[6].ALOAD
+ck => q[7].ALOAD
+ck => q[8].ALOAD
+ck => q[9].ALOAD
+ck => q[10].ALOAD
+ck => q[11].ALOAD
+ck => q[12].ALOAD
+ck => q[13].ALOAD
+ck => q[14].ALOAD
+ck => q[15].ALOAD
+res => q[0].CLK
+res => q[1].CLK
+res => q[2].CLK
+res => q[3].CLK
+res => q[4].CLK
+res => q[5].CLK
+res => q[6].CLK
+res => q[7].CLK
+res => q[8].CLK
+res => q[9].CLK
+res => q[10].CLK
+res => q[11].CLK
+res => q[12].CLK
+res => q[13].CLK
+res => q[14].CLK
+res => q[15].CLK
+Val[0] <= Val.DB_MAX_OUTPUT_PORT_TYPE
+Val[1] <= Val.DB_MAX_OUTPUT_PORT_TYPE
+Val[2] <= Val.DB_MAX_OUTPUT_PORT_TYPE
+Val[3] <= Val.DB_MAX_OUTPUT_PORT_TYPE
+Val[4] <= Val.DB_MAX_OUTPUT_PORT_TYPE
+Val[5] <= Val.DB_MAX_OUTPUT_PORT_TYPE
+Val[6] <= Val.DB_MAX_OUTPUT_PORT_TYPE
+Val[7] <= Val.DB_MAX_OUTPUT_PORT_TYPE
+Val[8] <= Val.DB_MAX_OUTPUT_PORT_TYPE
+Val[9] <= Val.DB_MAX_OUTPUT_PORT_TYPE
+Val[10] <= Val.DB_MAX_OUTPUT_PORT_TYPE
+Val[11] <= Val.DB_MAX_OUTPUT_PORT_TYPE
+Val[12] <= Val.DB_MAX_OUTPUT_PORT_TYPE
+Val[13] <= Val.DB_MAX_OUTPUT_PORT_TYPE
+Val[14] <= Val.DB_MAX_OUTPUT_PORT_TYPE
+Val[15] <= Val.DB_MAX_OUTPUT_PORT_TYPE
+enable => Val.OUTPUTSELECT
+enable => Val.OUTPUTSELECT
+enable => Val.OUTPUTSELECT
+enable => Val.OUTPUTSELECT
+enable => Val.OUTPUTSELECT
+enable => Val.OUTPUTSELECT
+enable => Val.OUTPUTSELECT
+enable => Val.OUTPUTSELECT
+enable => Val.OUTPUTSELECT
+enable => Val.OUTPUTSELECT
+enable => Val.OUTPUTSELECT
+enable => Val.OUTPUTSELECT
+enable => Val.OUTPUTSELECT
+enable => Val.OUTPUTSELECT
+enable => Val.OUTPUTSELECT
+enable => Val.OUTPUTSELECT
+
+
+|MemoryaddrBridge|clkdivider:clkdivider0
+clk => clk.IN1
+xclk <= Equal0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|MemoryaddrBridge|clkdivider:clkdivider0|tinyCounter:t_Counter
+ck => q[0].ALOAD
+ck => q[1].ALOAD
+res => q[0].CLK
+res => q[1].CLK
+Val[0] <= Val.DB_MAX_OUTPUT_PORT_TYPE
+Val[1] <= Val.DB_MAX_OUTPUT_PORT_TYPE
+enable => Val.OUTPUTSELECT
+enable => Val.OUTPUTSELECT
+
+

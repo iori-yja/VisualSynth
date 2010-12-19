@@ -1,0 +1,1 @@
+mktexpk --mfmode / --bdpi 600 --mag 0+555/600 --dpi 555 rml-jis

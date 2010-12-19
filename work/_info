@@ -1,0 +1,173 @@
+m255
+K3
+13
+cModel Technology
+d/home/ioriveur/quartus
+vByteCounter
+!s100 06o=b^UhLP_5nzJBW_Pc`3
+IH9l1`=OCQf;37kam_R90M1
+V_fCod9QN>[a4N[gmHIeRB2
+Z0 d/home/ioriveur/Desktop/quartus
+Z1 w1283701858
+Z2 8/home/ioriveur/Desktop/quartus/Verilog1.v
+Z3 F/home/ioriveur/Desktop/quartus/Verilog1.v
+L0 1
+Z4 OV;L;6.5b;42
+r1
+!s85 0
+31
+!s101 -O0
+Z5 !s102 -nocovercells
+Z6 o-work work -nocovercells -O0
+n@byte@counter
+vclkdivider
+!s100 8;YCGZ[99BZWQD^E7@N`93
+Iko2nR[[lP5DO6<VSWWMKU0
+V1zYkLV;gc1i_NbSfSmkJm3
+Z7 d/home/ioriveur/Desktop/quartus
+R1
+R2
+R3
+L0 100
+R4
+r1
+!s85 0
+31
+!s101 -O0
+R5
+R6
+vCounter
+ID3MoKo4On`n0YDXANCGSd3
+VLOWZi>OFb7XDzlWQbW:iK2
+R7
+Z8 w1283690421
+R2
+R3
+L0 1
+R4
+r1
+31
+R5
+R6
+n@counter
+!s100 cLfIf[=IO6FfYM8OK4jR01
+!s85 0
+!s101 -O0
+vHexCounter
+IR1Me0d8kjXbmc7=m[b7IG3
+VhHVJMA?P_A57a^TQdW0SA1
+R7
+R8
+R2
+R3
+L0 13
+R4
+r1
+31
+R5
+R6
+n@hex@counter
+!s100 B;5?A@lRQWfH=06aXNAdn3
+!s85 0
+!s101 -O0
+vMemoryaddrBridge
+!s100 ;njk5PH[C>GEVLF0CEzL>1
+IiQB@NWjV=@E8S56H:fP:`2
+VIzCVO3IF5Ve_:hDT9?R;g0
+R7
+R1
+R2
+R3
+L0 106
+R4
+r1
+!s85 0
+31
+!s101 -O0
+R5
+R6
+n@memoryaddr@bridge
+vmemoryaddressor
+!s100 RiAj^AERa1fkC4BhiNRgo2
+I@j[00ZH9nkL=b5KfS5HGD3
+Voc5W6:PX2jPz9MoUIA36A2
+R7
+R1
+R2
+R3
+L0 67
+R4
+r1
+!s85 0
+31
+!s101 -O0
+R5
+R6
+vTEST
+IH9g4L7ZJ>blj4XYfG<MS<0
+VbIW=:K5z]3n<z[T1F6BzC2
+R7
+w1283701533
+8/home/ioriveur/Desktop/quartus/TESTBENCH.v
+F/home/ioriveur/Desktop/quartus/TESTBENCH.v
+L0 1
+R4
+r1
+31
+R5
+R6
+n@t@e@s@t
+!s100 K7:UB2ni;XkY;S:1h?I?f1
+!s85 0
+!s101 -O0
+vTimingManager
+!s100 RXP9Nb;fa]7A1M8:lh58E0
+IQhz8LB3kC7G:`7YdZ1kO02
+Vh;C9`O[j>ceb2N;^=NN]50
+R7
+R1
+R2
+R3
+L0 38
+R4
+r1
+!s85 0
+31
+!s101 -O0
+R5
+R6
+n@timing@manager
+vtinyCounter
+!s100 4KC1<IdgEkKHen=jT>Xf02
+IW[NKKUWRA[6^5C@YYLlGo0
+V6kD0jMYn9C^gma8:TYVkZ2
+R7
+R1
+R2
+R3
+L0 13
+R4
+r1
+!s85 0
+31
+!s101 -O0
+R5
+R6
+ntiny@counter
+vWideCounter
+!s100 FemgiEgjPga<J5CzRXJJm0
+Inc`ZBf0Tn2lVzM?Db;0X72
+Vb1ank0[d^K;AUgo`6=V<X3
+R7
+R1
+R2
+R3
+L0 25
+R4
+r1
+!s85 0
+31
+!s101 -O0
+R5
+R6
+n@wide@counter

@@ -1,0 +1,76 @@
+--------------------------------------------------------------------------------------
+Timing Analyzer Summary
+--------------------------------------------------------------------------------------
+
+Type           : Worst-case tsu
+Slack          : N/A
+Required Time  : None
+Actual Time    : 2.408 ns
+From           : HREF
+To             : TimingManager:timemanager|Sig_En
+From Clock     : --
+To Clock       : pclk
+Failed Paths   : 0
+
+Type           : Worst-case tco
+Slack          : N/A
+Required Time  : None
+Actual Time    : 14.909 ns
+From           : memoryaddressor:menaddr|WideCounter:w_count1|q[3]
+To             : SRAM_address[3]
+From Clock     : pclk
+To Clock       : --
+Failed Paths   : 0
+
+Type           : Worst-case tpd
+Slack          : N/A
+Required Time  : None
+Actual Time    : 9.356 ns
+From           : pclk
+To             : SRAM_address[6]
+From Clock     : --
+To Clock       : --
+Failed Paths   : 0
+
+Type           : Worst-case th
+Slack          : N/A
+Required Time  : None
+Actual Time    : -1.227 ns
+From           : HREF
+To             : TimingManager:timemanager|res
+From Clock     : --
+To Clock       : pclk
+Failed Paths   : 0
+
+Type           : Clock Setup: 'pclk'
+Slack          : N/A
+Required Time  : None
+Actual Time    : 67.55 MHz ( period = 14.804 ns )
+From           : TimingManager:timemanager|ByteCounter:PixC|q[6]
+To             : TimingManager:timemanager|Sig_En
+From Clock     : pclk
+To Clock       : pclk
+Failed Paths   : 0
+
+Type           : Clock Setup: 'clk'
+Slack          : N/A
+Required Time  : None
+Actual Time    : 228.89 MHz ( period = 4.369 ns )
+From           : clkdivider:clkdivider0|tinyCounter:t_Counter|q[1]
+To             : clkdivider:clkdivider0|tinyCounter:t_Counter|q[1]
+From Clock     : clk
+To Clock       : clk
+Failed Paths   : 0
+
+Type           : Total number of failed paths
+Slack          : 
+Required Time  : 
+Actual Time    : 
+From           : 
+To             : 
+From Clock     : 
+To Clock       : 
+Failed Paths   : 0
+
+--------------------------------------------------------------------------------------
+
