@@ -4,23 +4,23 @@ reg HREF;
 wire WEb;
 wire BHEb;
 wire BLEb;
-reg pclk;
+wire pclk;
 wire [15:0] SRAM_address;
-wire clk;
+reg clk;
 wire xclk;
 //wire [7:0] line,foo;
 //wire CEb;
 //wire [17:0] adr;
 //wire pck;
-MemoryaddrBridge i1(clk,pclk,HREF,VSYNC,xclk,WEb,BHEb,BLEb,SRAM_address);
-
-initial pclk <= 1'b0;
+assign pclk = ~xclk;
+MemoryaddrBridge i1(clk,pclk,HREF,VSYNC,xclk,WEb,BLEb,BHEb,SRAM_address);
+initial clk <= 1'b0;
 initial HREF <= 1'b0;
 initial VSYNC <= 1'b1;
 initial #9408 VSYNC <= 0;
 
 always begin
-#1 pclk <= ~pclk;
+#1 clk <= ~clk;
 end
 always begin
   #576 HREF <= 1;
@@ -30,5 +30,6 @@ always begin
   #1589952 VSYNC <= 1;
   #9408 VSYNC <= 0;
 end
- initial  $monitor($time,"pclk=%b WEb=%b",pclk,WEb);
+initial $monitor($time, "addr=%h", SRAM_address);
+
 endmodule

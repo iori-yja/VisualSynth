@@ -1,6 +1,6 @@
 Analysis & Synthesis report for MemoryaddrBridge
-Sat Nov 20 03:52:18 2010
-Quartus II Version 9.1 Build 304 01/25/2010 Service Pack 1 SJ Web Edition
+Mon Dec 27 19:45:15 2010
+Quartus II Version 10.0 Build 262 08/18/2010 Service Pack 1 SJ Web Edition
 
 
 ---------------------
@@ -9,17 +9,15 @@ Quartus II Version 9.1 Build 304 01/25/2010 Service Pack 1 SJ Web Edition
   1. Legal Notice
   2. Analysis & Synthesis Summary
   3. Analysis & Synthesis Settings
-  4. Analysis & Synthesis Source Files Read
-  5. Analysis & Synthesis Resource Usage Summary
-  6. Analysis & Synthesis Resource Utilization by Entity
-  7. Registers Removed During Synthesis
-  8. General Register Statistics
-  9. Inverted Register Statistics
- 10. Port Connectivity Checks: "clkdivider:clkdivider0|tinyCounter:t_Counter"
- 11. Port Connectivity Checks: "memoryaddressor:menaddr|WideCounter:w_count1"
- 12. Port Connectivity Checks: "TimingManager:timemanager|ByteCounter:PixC"
- 13. Port Connectivity Checks: "TimingManager:timemanager|ByteCounter:HrefC"
- 14. Analysis & Synthesis Messages
+  4. Parallel Compilation
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. Registers Removed During Synthesis
+  9. General Register Statistics
+ 10. Inverted Register Statistics
+ 11. Analysis & Synthesis Messages
+ 12. Analysis & Synthesis Suppressed Messages
 
 
 
@@ -42,19 +40,19 @@ applicable agreement for further details.
 
 
 
-+----------------------------------------------------------------------------+
-; Analysis & Synthesis Summary                                               ;
-+-----------------------------+----------------------------------------------+
-; Analysis & Synthesis Status ; Successful - Sat Nov 20 03:52:18 2010        ;
-; Quartus II Version          ; 9.1 Build 304 01/25/2010 SP 1 SJ Web Edition ;
-; Revision Name               ; MemoryaddrBridge                             ;
-; Top-level Entity Name       ; MemoryaddrBridge                             ;
-; Family                      ; MAX II                                       ;
-; Total logic elements        ; 75                                           ;
-; Total pins                  ; 24                                           ;
-; Total virtual pins          ; 0                                            ;
-; UFM blocks                  ; 0 / 1 ( 0 % )                                ;
-+-----------------------------+----------------------------------------------+
++-----------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                ;
++-----------------------------+-----------------------------------------------+
+; Analysis & Synthesis Status ; Successful - Mon Dec 27 19:45:15 2010         ;
+; Quartus II Version          ; 10.0 Build 262 08/18/2010 SP 1 SJ Web Edition ;
+; Revision Name               ; MemoryaddrBridge                              ;
+; Top-level Entity Name       ; MemoryaddrBridge                              ;
+; Family                      ; MAX II                                        ;
+; Total logic elements        ; 58                                            ;
+; Total pins                  ; 25                                            ;
+; Total virtual pins          ; 0                                             ;
+; UFM blocks                  ; 0 / 1 ( 0 % )                                 ;
++-----------------------------+-----------------------------------------------+
 
 
 +----------------------------------------------------------------------------------------------------------------------+
@@ -106,7 +104,9 @@ applicable agreement for further details.
 ; Auto Resource Sharing                                                      ; Off                ; Off                ;
 ; Use LogicLock Constraints during Resource Balancing                        ; On                 ; On                 ;
 ; Ignore translate_off and synthesis_off directives                          ; Off                ; Off                ;
-; Show Parameter Settings Tables in Synthesis Report                         ; On                 ; On                 ;
+; Report Parameter Settings                                                  ; On                 ; On                 ;
+; Report Source Assignments                                                  ; On                 ; On                 ;
+; Report Connectivity Checks                                                 ; On                 ; On                 ;
 ; Ignore Maximum Fan-Out Assignments                                         ; Off                ; Off                ;
 ; Synchronization Register Chain Length                                      ; 2                  ; 2                  ;
 ; PowerPlay Power Optimization                                               ; Normal compilation ; Normal compilation ;
@@ -120,16 +120,29 @@ applicable agreement for further details.
 ; Shift Register Replacement - Allow Asynchronous Clear Signal               ; On                 ; On                 ;
 ; Analysis & Synthesis Message Level                                         ; Medium             ; Medium             ;
 ; Disable Register Merging Across Hierarchies                                ; Auto               ; Auto               ;
+; Synthesis Seed                                                             ; 1                  ; 1                  ;
 +----------------------------------------------------------------------------+--------------------+--------------------+
 
 
-+-------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                  ;
-+----------------------------------+-----------------+------------------------+-------------------------------------------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type              ; File Name with Absolute Path              ;
-+----------------------------------+-----------------+------------------------+-------------------------------------------+
-; Verilog1.v                       ; yes             ; User Verilog HDL File  ; /home/ioriveur/Desktop/quartus/Verilog1.v ;
-+----------------------------------+-----------------+------------------------+-------------------------------------------+
+Parallel compilation was disabled, but you have multiple processors available. Enable parallel compilation to reduce compilation time.
++-------------------------------------+
+; Parallel Compilation                ;
++----------------------------+--------+
+; Processors                 ; Number ;
++----------------------------+--------+
+; Number detected on machine ; 2      ;
+; Maximum allowed            ; 1      ;
++----------------------------+--------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                     ;
++----------------------------------+-----------------+------------------------+--------------------------------------------------------------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type              ; File Name with Absolute Path                                 ;
++----------------------------------+-----------------+------------------------+--------------------------------------------------------------+
+; Verilog1.v                       ; yes             ; User Verilog HDL File  ; D:/Documents and Settings/Ior/Desktop/quartusII/Verilog1.v   ;
+; NewBufctrl.v                     ; yes             ; User Verilog HDL File  ; D:/Documents and Settings/Ior/Desktop/quartusII/NewBufctrl.v ;
++----------------------------------+-----------------+------------------------+--------------------------------------------------------------+
 
 
 +--------------------------------------------------------------------------------+
@@ -137,61 +150,57 @@ applicable agreement for further details.
 +---------------------------------------------+----------------------------------+
 ; Resource                                    ; Usage                            ;
 +---------------------------------------------+----------------------------------+
-; Total logic elements                        ; 75                               ;
-;     -- Combinational with no register       ; 38                               ;
+; Total logic elements                        ; 58                               ;
+;     -- Combinational with no register       ; 21                               ;
 ;     -- Register only                        ; 2                                ;
 ;     -- Combinational with a register        ; 35                               ;
 ;                                             ;                                  ;
 ; Logic element usage by number of LUT inputs ;                                  ;
 ;     -- 4 input functions                    ; 2                                ;
-;     -- 3 input functions                    ; 2                                ;
-;     -- 2 input functions                    ; 31                               ;
-;     -- 1 input functions                    ; 5                                ;
-;     -- 0 input functions                    ; 33                               ;
+;     -- 3 input functions                    ; 1                                ;
+;     -- 2 input functions                    ; 32                               ;
+;     -- 1 input functions                    ; 6                                ;
+;     -- 0 input functions                    ; 15                               ;
 ;                                             ;                                  ;
 ; Logic elements by mode                      ;                                  ;
-;     -- normal mode                          ; 50                               ;
+;     -- normal mode                          ; 33                               ;
 ;     -- arithmetic mode                      ; 25                               ;
 ;     -- qfbk mode                            ; 0                                ;
 ;     -- register cascade mode                ; 0                                ;
 ;     -- synchronous clear/load mode          ; 0                                ;
-;     -- asynchronous clear/load mode         ; 33                               ;
+;     -- asynchronous clear/load mode         ; 15                               ;
 ;                                             ;                                  ;
 ; Total registers                             ; 37                               ;
 ; Total logic cells in carry chains           ; 28                               ;
-; I/O pins                                    ; 24                               ;
+; I/O pins                                    ; 25                               ;
 ; Maximum fan-out node                        ; TimingManager:timemanager|Sig_En ;
-; Maximum fan-out                             ; 20                               ;
-; Total fan-out                               ; 204                              ;
-; Average fan-out                             ; 2.06                             ;
+; Maximum fan-out                             ; 21                               ;
+; Total fan-out                               ; 187                              ;
+; Average fan-out                             ; 2.25                             ;
 +---------------------------------------------+----------------------------------+
 
 
-+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                 ;
-+--------------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+----------------------------------------------------------------+--------------+
-; Compilation Hierarchy Node     ; Logic Cells ; LC Registers ; UFM Blocks ; Pins ; Virtual Pins ; LUT-Only LCs ; Register-Only LCs ; LUT/Register LCs ; Carry Chain LCs ; Packed LCs ; Full Hierarchy Name                                            ; Library Name ;
-+--------------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+----------------------------------------------------------------+--------------+
-; |MemoryaddrBridge              ; 75 (0)      ; 37           ; 0          ; 24   ; 0            ; 38 (0)       ; 2 (0)             ; 35 (0)           ; 28 (0)          ; 0 (0)      ; |MemoryaddrBridge                                              ; work         ;
-;    |TimingManager:timemanager| ; 36 (5)      ; 18           ; 0          ; 0    ; 0            ; 18 (2)       ; 1 (1)             ; 17 (2)           ; 13 (0)          ; 0 (0)      ; |MemoryaddrBridge|TimingManager:timemanager                    ; work         ;
-;       |ByteCounter:HrefC|      ; 16 (16)     ; 8            ; 0          ; 0    ; 0            ; 8 (8)        ; 0 (0)             ; 8 (8)            ; 7 (7)           ; 0 (0)      ; |MemoryaddrBridge|TimingManager:timemanager|ByteCounter:HrefC  ; work         ;
-;       |ByteCounter:PixC|       ; 15 (15)     ; 7            ; 0          ; 0    ; 0            ; 8 (8)        ; 0 (0)             ; 7 (7)            ; 6 (6)           ; 0 (0)      ; |MemoryaddrBridge|TimingManager:timemanager|ByteCounter:PixC   ; work         ;
-;    |clkdivider:clkdivider0|    ; 5 (1)       ; 2            ; 0          ; 0    ; 0            ; 3 (1)        ; 0 (0)             ; 2 (0)            ; 0 (0)           ; 0 (0)      ; |MemoryaddrBridge|clkdivider:clkdivider0                       ; work         ;
-;       |tinyCounter:t_Counter|  ; 4 (4)       ; 2            ; 0          ; 0    ; 0            ; 2 (2)        ; 0 (0)             ; 2 (2)            ; 0 (0)           ; 0 (0)      ; |MemoryaddrBridge|clkdivider:clkdivider0|tinyCounter:t_Counter ; work         ;
-;    |memoryaddressor:menaddr|   ; 34 (2)      ; 17           ; 0          ; 0    ; 0            ; 17 (1)       ; 1 (1)             ; 16 (0)           ; 15 (0)          ; 0 (0)      ; |MemoryaddrBridge|memoryaddressor:menaddr                      ; work         ;
-;       |WideCounter:w_count1|   ; 32 (32)     ; 16           ; 0          ; 0    ; 0            ; 16 (16)      ; 0 (0)             ; 16 (16)          ; 15 (15)         ; 0 (0)      ; |MemoryaddrBridge|memoryaddressor:menaddr|WideCounter:w_count1 ; work         ;
-+--------------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+----------------------------------------------------------------+--------------+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                              ;
++--------------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+---------------------------------------------+--------------+
+; Compilation Hierarchy Node     ; Logic Cells ; LC Registers ; UFM Blocks ; Pins ; Virtual Pins ; LUT-Only LCs ; Register-Only LCs ; LUT/Register LCs ; Carry Chain LCs ; Packed LCs ; Full Hierarchy Name                         ; Library Name ;
++--------------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+---------------------------------------------+--------------+
+; |MemoryaddrBridge              ; 58 (0)      ; 37           ; 0          ; 25   ; 0            ; 21 (0)       ; 2 (0)             ; 35 (0)           ; 28 (0)          ; 0 (0)      ; |MemoryaddrBridge                           ; work         ;
+;    |TimingManager:timemanager| ; 38 (38)     ; 18           ; 0          ; 0    ; 0            ; 20 (20)      ; 1 (1)             ; 17 (17)          ; 13 (13)         ; 0 (0)      ; |MemoryaddrBridge|TimingManager:timemanager ; work         ;
+;    |clkdivider:clkdivider0|    ; 2 (2)       ; 2            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 2 (2)            ; 0 (0)           ; 0 (0)      ; |MemoryaddrBridge|clkdivider:clkdivider0    ; work         ;
+;    |memoryaddressor:menaddr|   ; 18 (18)     ; 17           ; 0          ; 0    ; 0            ; 1 (1)        ; 1 (1)             ; 16 (16)          ; 15 (15)         ; 0 (0)      ; |MemoryaddrBridge|memoryaddressor:menaddr   ; work         ;
++--------------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+---------------------------------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
 
-+----------------------------------------------------------------------+
-; Registers Removed During Synthesis                                   ;
-+-------------------------------------------------+--------------------+
-; Register name                                   ; Reason for Removal ;
-+-------------------------------------------------+--------------------+
-; TimingManager:timemanager|ByteCounter:PixC|q[7] ; Lost fanout        ;
-; Total Number of Removed Registers = 1           ;                    ;
-+-------------------------------------------------+--------------------+
++------------------------------------------------------------+
+; Registers Removed During Synthesis                         ;
++---------------------------------------+--------------------+
+; Register name                         ; Reason for Removal ;
++---------------------------------------+--------------------+
+; TimingManager:timemanager|foo[7]      ; Lost fanout        ;
+; Total Number of Removed Registers = 1 ;                    ;
++---------------------------------------+--------------------+
 
 
 +------------------------------------------------------+
@@ -203,7 +212,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Number of registers using Synchronous Clear  ; 0     ;
 ; Number of registers using Synchronous Load   ; 0     ;
 ; Number of registers using Asynchronous Clear ; 0     ;
-; Number of registers using Asynchronous Load  ; 33    ;
+; Number of registers using Asynchronous Load  ; 15    ;
 ; Number of registers using Clock Enable       ; 0     ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
@@ -214,48 +223,9 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------+---------+
 ; Inverted Register                      ; Fan out ;
 +----------------------------------------+---------+
-; TimingManager:timemanager|Sig_En       ; 20      ;
+; TimingManager:timemanager|Sig_En       ; 21      ;
 ; Total number of inverted registers = 1 ;         ;
 +----------------------------------------+---------+
-
-
-+--------------------------------------------------------------------------+
-; Port Connectivity Checks: "clkdivider:clkdivider0|tinyCounter:t_Counter" ;
-+--------+-------+----------+----------------------------------------------+
-; Port   ; Type  ; Severity ; Details                                      ;
-+--------+-------+----------+----------------------------------------------+
-; res    ; Input ; Info     ; Stuck at GND                                 ;
-; enable ; Input ; Info     ; Stuck at VCC                                 ;
-+--------+-------+----------+----------------------------------------------+
-
-
-+--------------------------------------------------------------------------+
-; Port Connectivity Checks: "memoryaddressor:menaddr|WideCounter:w_count1" ;
-+--------+-------+----------+----------------------------------------------+
-; Port   ; Type  ; Severity ; Details                                      ;
-+--------+-------+----------+----------------------------------------------+
-; res    ; Input ; Info     ; Stuck at GND                                 ;
-; enable ; Input ; Info     ; Stuck at VCC                                 ;
-+--------+-------+----------+----------------------------------------------+
-
-
-+---------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "TimingManager:timemanager|ByteCounter:PixC"                                              ;
-+-----------+--------+----------+-------------------------------------------------------------------------------------+
-; Port      ; Type   ; Severity ; Details                                                                             ;
-+-----------+--------+----------+-------------------------------------------------------------------------------------+
-; Val[5..0] ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; Val[7]    ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-+-----------+--------+----------+-------------------------------------------------------------------------------------+
-
-
-+-------------------------------------------------------------------------+
-; Port Connectivity Checks: "TimingManager:timemanager|ByteCounter:HrefC" ;
-+--------+-------+----------+---------------------------------------------+
-; Port   ; Type  ; Severity ; Details                                     ;
-+--------+-------+----------+---------------------------------------------+
-; enable ; Input ; Info     ; Stuck at VCC                                ;
-+--------+-------+----------+---------------------------------------------+
 
 
 +-------------------------------+
@@ -263,34 +233,44 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-------------------------------+
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
-    Info: Version 9.1 Build 304 01/25/2010 Service Pack 1 SJ Web Edition
-    Info: Processing started: Sat Nov 20 03:52:12 2010
+    Info: Version 10.0 Build 262 08/18/2010 Service Pack 1 SJ Web Edition
+    Info: Processing started: Mon Dec 27 19:45:14 2010
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off MemoryaddrBridge -c MemoryaddrBridge
-Info: Found 7 design units, including 7 entities, in source file Verilog1.v
-    Info: Found entity 1: ByteCounter
-    Info: Found entity 2: tinyCounter
-    Info: Found entity 3: WideCounter
-    Info: Found entity 4: TimingManager
-    Info: Found entity 5: memoryaddressor
-    Info: Found entity 6: clkdivider
-    Info: Found entity 7: MemoryaddrBridge
+Info: Found 2 design units, including 2 entities, in source file verilog1.v
+    Info: Found entity 1: clkdivider
+    Info: Found entity 2: MemoryaddrBridge
+Info: Found 1 design units, including 1 entities, in source file queue.v
+    Info: Found entity 1: Queue
+Info: Found 1 design units, including 1 entities, in source file sounddriver.v
+    Info: Found entity 1: ymzdriv
+Warning (10261): Verilog HDL Event Control warning at NewBufctrl.v(13): Event Control contains a complex event expression
+Info: Found 3 design units, including 3 entities, in source file newbufctrl.v
+    Info: Found entity 1: TimingManager
+    Info: Found entity 2: InLayer
+    Info: Found entity 3: memoryaddressor
+Info: Found 1 design units, including 1 entities, in source file ugly.v
+    Info: Found entity 1: Sendbridge
 Info: Elaborating entity "MemoryaddrBridge" for the top level hierarchy
 Info: Elaborating entity "TimingManager" for hierarchy "TimingManager:timemanager"
-Info: Elaborating entity "ByteCounter" for hierarchy "TimingManager:timemanager|ByteCounter:HrefC"
 Info: Elaborating entity "memoryaddressor" for hierarchy "memoryaddressor:menaddr"
-Info: Elaborating entity "WideCounter" for hierarchy "memoryaddressor:menaddr|WideCounter:w_count1"
 Info: Elaborating entity "clkdivider" for hierarchy "clkdivider:clkdivider0"
-Info: Elaborating entity "tinyCounter" for hierarchy "clkdivider:clkdivider0|tinyCounter:t_Counter"
 Info: 1 registers lost all their fanouts during netlist optimizations. The first 1 are displayed below.
-    Info: Register "TimingManager:timemanager|ByteCounter:PixC|q[7]" lost all its fanouts during netlist optimizations.
-Info: Implemented 99 device resources after synthesis - the final resource count might be different
+    Info: Register "TimingManager:timemanager|foo[7]" lost all its fanouts during netlist optimizations.
+Info: Implemented 83 device resources after synthesis - the final resource count might be different
     Info: Implemented 4 input pins
-    Info: Implemented 20 output pins
-    Info: Implemented 75 logic cells
-Info: Quartus II Analysis & Synthesis was successful. 0 errors, 0 warnings
-    Info: Peak virtual memory: 179 megabytes
-    Info: Processing ended: Sat Nov 20 03:52:18 2010
-    Info: Elapsed time: 00:00:06
-    Info: Total CPU time (on all processors): 00:00:03
+    Info: Implemented 21 output pins
+    Info: Implemented 58 logic cells
+Info: Generated suppressed messages file D:/Documents and Settings/Ior/Desktop/quartusII/MemoryaddrBridge.map.smsg
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 1 warning
+    Info: Peak virtual memory: 191 megabytes
+    Info: Processing ended: Mon Dec 27 19:45:15 2010
+    Info: Elapsed time: 00:00:01
+    Info: Total CPU time (on all processors): 00:00:01
+
+
++------------------------------------------+
+; Analysis & Synthesis Suppressed Messages ;
++------------------------------------------+
+The suppressed messages can be found in D:/Documents and Settings/Ior/Desktop/quartusII/MemoryaddrBridge.map.smsg.
 
 

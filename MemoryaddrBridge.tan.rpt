@@ -1,22 +1,24 @@
 Classic Timing Analyzer report for MemoryaddrBridge
-Sat Nov 20 03:52:50 2010
-Quartus II Version 9.1 Build 304 01/25/2010 Service Pack 1 SJ Web Edition
+Mon Dec 27 19:45:21 2010
+Quartus II Version 10.0 Build 262 08/18/2010 Service Pack 1 SJ Web Edition
 
 
 ---------------------
 ; Table of Contents ;
 ---------------------
   1. Legal Notice
-  2. Timing Analyzer Summary
-  3. Timing Analyzer Settings
-  4. Clock Settings Summary
-  5. Clock Setup: 'clk'
-  6. Clock Setup: 'pclk'
-  7. tsu
-  8. tco
-  9. tpd
- 10. th
- 11. Timing Analyzer Messages
+  2. Classic Timing Analyzer Deprecation
+  3. Timing Analyzer Summary
+  4. Timing Analyzer Settings
+  5. Clock Settings Summary
+  6. Parallel Compilation
+  7. Clock Setup: 'clk'
+  8. Clock Setup: 'pclk'
+  9. tsu
+ 10. tco
+ 11. tpd
+ 12. th
+ 13. Timing Analyzer Messages
 
 
 
@@ -39,19 +41,25 @@ applicable agreement for further details.
 
 
 
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Timing Analyzer Summary                                                                                                                                                                                                                ;
-+------------------------------+-------+---------------+----------------------------------+---------------------------------------------------+---------------------------------------------------+------------+----------+--------------+
-; Type                         ; Slack ; Required Time ; Actual Time                      ; From                                              ; To                                                ; From Clock ; To Clock ; Failed Paths ;
-+------------------------------+-------+---------------+----------------------------------+---------------------------------------------------+---------------------------------------------------+------------+----------+--------------+
-; Worst-case tsu               ; N/A   ; None          ; 2.408 ns                         ; HREF                                              ; TimingManager:timemanager|Sig_En                  ; --         ; pclk     ; 0            ;
-; Worst-case tco               ; N/A   ; None          ; 14.909 ns                        ; memoryaddressor:menaddr|WideCounter:w_count1|q[3] ; SRAM_address[3]                                   ; pclk       ; --       ; 0            ;
-; Worst-case tpd               ; N/A   ; None          ; 9.356 ns                         ; pclk                                              ; SRAM_address[6]                                   ; --         ; --       ; 0            ;
-; Worst-case th                ; N/A   ; None          ; -1.227 ns                        ; HREF                                              ; TimingManager:timemanager|res                     ; --         ; pclk     ; 0            ;
-; Clock Setup: 'pclk'          ; N/A   ; None          ; 67.55 MHz ( period = 14.804 ns ) ; TimingManager:timemanager|ByteCounter:PixC|q[6]   ; TimingManager:timemanager|Sig_En                  ; pclk       ; pclk     ; 0            ;
-; Clock Setup: 'clk'           ; N/A   ; None          ; 228.89 MHz ( period = 4.369 ns ) ; clkdivider:clkdivider0|tinyCounter:t_Counter|q[1] ; clkdivider:clkdivider0|tinyCounter:t_Counter|q[1] ; clk        ; clk      ; 0            ;
-; Total number of failed paths ;       ;               ;                                  ;                                                   ;                                                   ;            ;          ; 0            ;
-+------------------------------+-------+---------------+----------------------------------+---------------------------------------------------+---------------------------------------------------+------------+----------+--------------+
+---------------------------------------
+; Classic Timing Analyzer Deprecation ;
+---------------------------------------
+Classic Timing Analyzer will not be available in a future release of the Quartus II software. Use the TimeQuest Timing Analyzer to run timing analysis on your design. Convert all the project settings and the timing constraints to TimeQuest Timing Analyzer equivalents.
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Timing Analyzer Summary                                                                                                                                                                                                   ;
++------------------------------+-------+---------------+------------------------------------------------+----------------------------------------+-----------------------------------+------------+----------+--------------+
+; Type                         ; Slack ; Required Time ; Actual Time                                    ; From                                   ; To                                ; From Clock ; To Clock ; Failed Paths ;
++------------------------------+-------+---------------+------------------------------------------------+----------------------------------------+-----------------------------------+------------+----------+--------------+
+; Worst-case tsu               ; N/A   ; None          ; -0.670 ns                                      ; HREF                                   ; TimingManager:timemanager|Sig_En  ; --         ; pclk     ; 0            ;
+; Worst-case tco               ; N/A   ; None          ; 18.674 ns                                      ; memoryaddressor:menaddr|preAddress[10] ; SRAM_address[10]                  ; pclk       ; --       ; 0            ;
+; Worst-case tpd               ; N/A   ; None          ; 10.948 ns                                      ; pclk                                   ; WEb                               ; --         ; --       ; 0            ;
+; Worst-case th                ; N/A   ; None          ; 1.799 ns                                       ; HREF                                   ; TimingManager:timemanager|res     ; --         ; pclk     ; 0            ;
+; Clock Setup: 'pclk'          ; N/A   ; None          ; 55.44 MHz ( period = 18.038 ns )               ; TimingManager:timemanager|foo[6]       ; TimingManager:timemanager|Sig_En  ; pclk       ; pclk     ; 0            ;
+; Clock Setup: 'clk'           ; N/A   ; None          ; Restricted to 304.04 MHz ( period = 3.289 ns ) ; clkdivider:clkdivider0|t_count[0]      ; clkdivider:clkdivider0|t_count[0] ; clk        ; clk      ; 0            ;
+; Total number of failed paths ;       ;               ;                                                ;                                        ;                                   ;            ;          ; 0            ;
++------------------------------+-------+---------------+------------------------------------------------+----------------------------------------+-----------------------------------+------------+----------+--------------+
 
 
 +-----------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -84,7 +92,6 @@ applicable agreement for further details.
 ; Reports worst-case timing paths for each clock domain and analysis                                   ; On                 ;      ;    ;             ;
 ; Specifies the maximum number of worst-case timing paths to report for each clock domain and analysis ; 100                ;      ;    ;             ;
 ; Removes common clock path pessimism (CCPP) during slack computation                                  ; Off                ;      ;    ;             ;
-; Output I/O Timing Endpoint                                                                           ; Near End           ;      ;    ;             ;
 +------------------------------------------------------------------------------------------------------+--------------------+------+----+-------------+
 
 
@@ -95,168 +102,177 @@ applicable agreement for further details.
 +-----------------+--------------------+----------+------------------+---------------+--------------+----------+-----------------------+---------------------+--------+--------------+
 ; clk             ;                    ; User Pin ; None             ; 0.000 ns      ; 0.000 ns     ; --       ; N/A                   ; N/A                 ; N/A    ;              ;
 ; pclk            ;                    ; User Pin ; None             ; 0.000 ns      ; 0.000 ns     ; --       ; N/A                   ; N/A                 ; N/A    ;              ;
+; HREF            ;                    ; User Pin ; None             ; 0.000 ns      ; 0.000 ns     ; --       ; N/A                   ; N/A                 ; N/A    ;              ;
 ; VSYNC           ;                    ; User Pin ; None             ; 0.000 ns      ; 0.000 ns     ; --       ; N/A                   ; N/A                 ; N/A    ;              ;
 +-----------------+--------------------+----------+------------------+---------------+--------------+----------+-----------------------+---------------------+--------+--------------+
 
 
-+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Clock Setup: 'clk'                                                                                                                                                                                                                                           ;
-+-------+----------------------------------+---------------------------------------------------+---------------------------------------------------+------------+----------+-----------------------------+---------------------------+-------------------------+
-; Slack ; Actual fmax (period)             ; From                                              ; To                                                ; From Clock ; To Clock ; Required Setup Relationship ; Required Longest P2P Time ; Actual Longest P2P Time ;
-+-------+----------------------------------+---------------------------------------------------+---------------------------------------------------+------------+----------+-----------------------------+---------------------------+-------------------------+
-; N/A   ; 228.89 MHz ( period = 4.369 ns ) ; clkdivider:clkdivider0|tinyCounter:t_Counter|q[1] ; clkdivider:clkdivider0|tinyCounter:t_Counter|q[1] ; clk        ; clk      ; None                        ; None                      ; 3.660 ns                ;
-; N/A   ; 249.44 MHz ( period = 4.009 ns ) ; clkdivider:clkdivider0|tinyCounter:t_Counter|q[0] ; clkdivider:clkdivider0|tinyCounter:t_Counter|q[1] ; clk        ; clk      ; None                        ; None                      ; 3.300 ns                ;
-; N/A   ; 249.75 MHz ( period = 4.004 ns ) ; clkdivider:clkdivider0|tinyCounter:t_Counter|q[0] ; clkdivider:clkdivider0|tinyCounter:t_Counter|q[0] ; clk        ; clk      ; None                        ; None                      ; 3.295 ns                ;
-+-------+----------------------------------+---------------------------------------------------+---------------------------------------------------+------------+----------+-----------------------------+---------------------------+-------------------------+
+Parallel compilation was disabled, but you have multiple processors available. Enable parallel compilation to reduce compilation time.
++-------------------------------------+
+; Parallel Compilation                ;
++----------------------------+--------+
+; Processors                 ; Number ;
++----------------------------+--------+
+; Number detected on machine ; 2      ;
+; Maximum allowed            ; 1      ;
++----------------------------+--------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Clock Setup: 'pclk'                                                                                                                                                                                                                                            ;
-+-------+----------------------------------+----------------------------------------------------+----------------------------------------------------+------------+----------+-----------------------------+---------------------------+-------------------------+
-; Slack ; Actual fmax (period)             ; From                                               ; To                                                 ; From Clock ; To Clock ; Required Setup Relationship ; Required Longest P2P Time ; Actual Longest P2P Time ;
-+-------+----------------------------------+----------------------------------------------------+----------------------------------------------------+------------+----------+-----------------------------+---------------------------+-------------------------+
-; N/A   ; 67.55 MHz ( period = 14.804 ns ) ; TimingManager:timemanager|ByteCounter:PixC|q[6]    ; TimingManager:timemanager|Sig_En                   ; pclk       ; pclk     ; None                        ; None                      ; 1.991 ns                ;
-; N/A   ; 72.50 MHz ( period = 13.794 ns ) ; TimingManager:timemanager|ByteCounter:PixC|q[6]    ; TimingManager:timemanager|res                      ; pclk       ; pclk     ; None                        ; None                      ; 1.486 ns                ;
-; N/A   ; 98.76 MHz ( period = 10.126 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[3]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[7]  ; pclk       ; pclk     ; None                        ; None                      ; 9.417 ns                ;
-; N/A   ; 100.87 MHz ( period = 9.914 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[4]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[7]  ; pclk       ; pclk     ; None                        ; None                      ; 9.205 ns                ;
-; N/A   ; 101.31 MHz ( period = 9.871 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[5]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[7]  ; pclk       ; pclk     ; None                        ; None                      ; 9.162 ns                ;
-; N/A   ; 106.63 MHz ( period = 9.378 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[6]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[7]  ; pclk       ; pclk     ; None                        ; None                      ; 8.669 ns                ;
-; N/A   ; 107.94 MHz ( period = 9.264 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[0]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[7]  ; pclk       ; pclk     ; None                        ; None                      ; 8.710 ns                ;
-; N/A   ; 108.45 MHz ( period = 9.221 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[3]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[6]  ; pclk       ; pclk     ; None                        ; None                      ; 8.512 ns                ;
-; N/A   ; 108.89 MHz ( period = 9.184 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[3]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[10] ; pclk       ; pclk     ; None                        ; None                      ; 8.475 ns                ;
-; N/A   ; 108.89 MHz ( period = 9.184 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[12] ; memoryaddressor:menaddr|WideCounter:w_count1|q[13] ; pclk       ; pclk     ; None                        ; None                      ; 8.475 ns                ;
-; N/A   ; 109.02 MHz ( period = 9.173 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[3]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[12] ; pclk       ; pclk     ; None                        ; None                      ; 9.127 ns                ;
-; N/A   ; 109.34 MHz ( period = 9.146 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[3]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[11] ; pclk       ; pclk     ; None                        ; None                      ; 8.437 ns                ;
-; N/A   ; 109.54 MHz ( period = 9.129 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[3]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[13] ; pclk       ; pclk     ; None                        ; None                      ; 9.083 ns                ;
-; N/A   ; 110.71 MHz ( period = 9.033 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[3]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[9]  ; pclk       ; pclk     ; None                        ; None                      ; 8.324 ns                ;
-; N/A   ; 111.00 MHz ( period = 9.009 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[4]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[6]  ; pclk       ; pclk     ; None                        ; None                      ; 8.300 ns                ;
-; N/A   ; 111.46 MHz ( period = 8.972 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[4]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[10] ; pclk       ; pclk     ; None                        ; None                      ; 8.263 ns                ;
-; N/A   ; 111.50 MHz ( period = 8.969 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[3]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[8]  ; pclk       ; pclk     ; None                        ; None                      ; 8.260 ns                ;
-; N/A   ; 111.53 MHz ( period = 8.966 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[5]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[6]  ; pclk       ; pclk     ; None                        ; None                      ; 8.257 ns                ;
-; N/A   ; 111.59 MHz ( period = 8.961 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[4]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[12] ; pclk       ; pclk     ; None                        ; None                      ; 8.915 ns                ;
-; N/A   ; 111.93 MHz ( period = 8.934 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[4]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[11] ; pclk       ; pclk     ; None                        ; None                      ; 8.225 ns                ;
-; N/A   ; 111.99 MHz ( period = 8.929 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[5]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[10] ; pclk       ; pclk     ; None                        ; None                      ; 8.220 ns                ;
-; N/A   ; 112.13 MHz ( period = 8.918 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[5]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[12] ; pclk       ; pclk     ; None                        ; None                      ; 8.872 ns                ;
-; N/A   ; 112.15 MHz ( period = 8.917 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[4]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[13] ; pclk       ; pclk     ; None                        ; None                      ; 8.871 ns                ;
-; N/A   ; 112.47 MHz ( period = 8.891 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[5]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[11] ; pclk       ; pclk     ; None                        ; None                      ; 8.182 ns                ;
-; N/A   ; 112.69 MHz ( period = 8.874 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[5]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[13] ; pclk       ; pclk     ; None                        ; None                      ; 8.828 ns                ;
-; N/A   ; 113.37 MHz ( period = 8.821 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[4]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[9]  ; pclk       ; pclk     ; None                        ; None                      ; 8.112 ns                ;
-; N/A   ; 113.92 MHz ( period = 8.778 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[5]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[9]  ; pclk       ; pclk     ; None                        ; None                      ; 8.069 ns                ;
-; N/A   ; 114.19 MHz ( period = 8.757 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[4]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[8]  ; pclk       ; pclk     ; None                        ; None                      ; 8.048 ns                ;
-; N/A   ; 114.76 MHz ( period = 8.714 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[5]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[8]  ; pclk       ; pclk     ; None                        ; None                      ; 8.005 ns                ;
-; N/A   ; 115.73 MHz ( period = 8.641 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[3]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[5]  ; pclk       ; pclk     ; None                        ; None                      ; 7.932 ns                ;
-; N/A   ; 116.00 MHz ( period = 8.621 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[8]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[13] ; pclk       ; pclk     ; None                        ; None                      ; 8.575 ns                ;
-; N/A   ; 116.47 MHz ( period = 8.586 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[7]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[7]  ; pclk       ; pclk     ; None                        ; None                      ; 7.877 ns                ;
-; N/A   ; 116.54 MHz ( period = 8.581 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[1]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[7]  ; pclk       ; pclk     ; None                        ; None                      ; 8.027 ns                ;
-; N/A   ; 117.29 MHz ( period = 8.526 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[2]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[7]  ; pclk       ; pclk     ; None                        ; None                      ; 7.972 ns                ;
-; N/A   ; 117.90 MHz ( period = 8.482 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[0]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[6]  ; pclk       ; pclk     ; None                        ; None                      ; 7.928 ns                ;
-; N/A   ; 118.54 MHz ( period = 8.436 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[6]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[10] ; pclk       ; pclk     ; None                        ; None                      ; 7.727 ns                ;
-; N/A   ; 118.64 MHz ( period = 8.429 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[4]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[5]  ; pclk       ; pclk     ; None                        ; None                      ; 7.720 ns                ;
-; N/A   ; 118.69 MHz ( period = 8.425 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[6]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[12] ; pclk       ; pclk     ; None                        ; None                      ; 8.379 ns                ;
-; N/A   ; 118.78 MHz ( period = 8.419 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[7]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[10] ; pclk       ; pclk     ; None                        ; None                      ; 7.710 ns                ;
-; N/A   ; 118.93 MHz ( period = 8.408 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[7]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[12] ; pclk       ; pclk     ; None                        ; None                      ; 8.362 ns                ;
-; N/A   ; 119.03 MHz ( period = 8.401 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[9]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[13] ; pclk       ; pclk     ; None                        ; None                      ; 8.355 ns                ;
-; N/A   ; 119.08 MHz ( period = 8.398 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[6]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[11] ; pclk       ; pclk     ; None                        ; None                      ; 7.689 ns                ;
-; N/A   ; 119.32 MHz ( period = 8.381 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[7]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[11] ; pclk       ; pclk     ; None                        ; None                      ; 7.672 ns                ;
-; N/A   ; 119.32 MHz ( period = 8.381 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[6]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[13] ; pclk       ; pclk     ; None                        ; None                      ; 8.335 ns                ;
-; N/A   ; 119.56 MHz ( period = 8.364 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[7]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[13] ; pclk       ; pclk     ; None                        ; None                      ; 8.318 ns                ;
-; N/A   ; 120.70 MHz ( period = 8.285 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[6]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[9]  ; pclk       ; pclk     ; None                        ; None                      ; 7.576 ns                ;
-; N/A   ; 120.95 MHz ( period = 8.268 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[7]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[9]  ; pclk       ; pclk     ; None                        ; None                      ; 7.559 ns                ;
-; N/A   ; 121.49 MHz ( period = 8.231 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[8]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[12] ; pclk       ; pclk     ; None                        ; None                      ; 8.185 ns                ;
-; N/A   ; 121.61 MHz ( period = 8.223 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[11] ; memoryaddressor:menaddr|WideCounter:w_count1|q[13] ; pclk       ; pclk     ; None                        ; None                      ; 8.177 ns                ;
-; N/A   ; 121.64 MHz ( period = 8.221 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[6]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[8]  ; pclk       ; pclk     ; None                        ; None                      ; 7.512 ns                ;
-; N/A   ; 121.82 MHz ( period = 8.209 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[13] ; memoryaddressor:menaddr|WideCounter:w_count1|q[13] ; pclk       ; pclk     ; None                        ; None                      ; 7.500 ns                ;
-; N/A   ; 121.89 MHz ( period = 8.204 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[7]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[8]  ; pclk       ; pclk     ; None                        ; None                      ; 7.495 ns                ;
-; N/A   ; 122.77 MHz ( period = 8.145 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[12] ; memoryaddressor:menaddr|WideCounter:w_count1|q[14] ; pclk       ; pclk     ; None                        ; None                      ; 6.598 ns                ;
-; N/A   ; 122.79 MHz ( period = 8.144 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[12] ; memoryaddressor:menaddr|WideCounter:w_count1|q[15] ; pclk       ; pclk     ; None                        ; None                      ; 6.597 ns                ;
-; N/A   ; 123.12 MHz ( period = 8.122 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[0]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[3]  ; pclk       ; pclk     ; None                        ; None                      ; 7.568 ns                ;
-; N/A   ; 123.24 MHz ( period = 8.114 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[13] ; memoryaddressor:menaddr|WideCounter:w_count1|q[15] ; pclk       ; pclk     ; None                        ; None                      ; 6.567 ns                ;
-; N/A   ; 123.27 MHz ( period = 8.112 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[0]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[10] ; pclk       ; pclk     ; None                        ; None                      ; 7.558 ns                ;
-; N/A   ; 123.44 MHz ( period = 8.101 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[0]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[12] ; pclk       ; pclk     ; None                        ; None                      ; 8.210 ns                ;
-; N/A   ; 123.49 MHz ( period = 8.098 ns ) ; TimingManager:timemanager|Sig_En                   ; memoryaddressor:menaddr|write_state                ; pclk       ; pclk     ; None                        ; None                      ; 3.340 ns                ;
-; N/A   ; 123.61 MHz ( period = 8.090 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[3]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[14] ; pclk       ; pclk     ; None                        ; None                      ; 7.206 ns                ;
-; N/A   ; 123.62 MHz ( period = 8.089 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[3]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[15] ; pclk       ; pclk     ; None                        ; None                      ; 7.205 ns                ;
-; N/A   ; 123.75 MHz ( period = 8.081 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[8]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[11] ; pclk       ; pclk     ; None                        ; None                      ; 7.372 ns                ;
-; N/A   ; 123.79 MHz ( period = 8.078 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[10] ; memoryaddressor:menaddr|WideCounter:w_count1|q[13] ; pclk       ; pclk     ; None                        ; None                      ; 8.032 ns                ;
-; N/A   ; 123.85 MHz ( period = 8.074 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[0]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[11] ; pclk       ; pclk     ; None                        ; None                      ; 7.520 ns                ;
-; N/A   ; 124.12 MHz ( period = 8.057 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[0]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[13] ; pclk       ; pclk     ; None                        ; None                      ; 8.166 ns                ;
-; N/A   ; 124.60 MHz ( period = 8.026 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[12] ; memoryaddressor:menaddr|WideCounter:w_count1|q[12] ; pclk       ; pclk     ; None                        ; None                      ; 7.317 ns                ;
-; N/A   ; 124.61 MHz ( period = 8.025 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[0]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[5]  ; pclk       ; pclk     ; None                        ; None                      ; 7.471 ns                ;
-; N/A   ; 124.67 MHz ( period = 8.021 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[3]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[4]  ; pclk       ; pclk     ; None                        ; None                      ; 7.312 ns                ;
-; N/A   ; 124.83 MHz ( period = 8.011 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[9]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[12] ; pclk       ; pclk     ; None                        ; None                      ; 7.965 ns                ;
-; N/A   ; 125.06 MHz ( period = 7.996 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[8]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[10] ; pclk       ; pclk     ; None                        ; None                      ; 7.287 ns                ;
-; N/A   ; 125.13 MHz ( period = 7.992 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[13] ; memoryaddressor:menaddr|WideCounter:w_count1|q[14] ; pclk       ; pclk     ; None                        ; None                      ; 6.445 ns                ;
-; N/A   ; 125.61 MHz ( period = 7.961 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[0]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[9]  ; pclk       ; pclk     ; None                        ; None                      ; 7.407 ns                ;
-; N/A   ; 126.63 MHz ( period = 7.897 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[0]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[8]  ; pclk       ; pclk     ; None                        ; None                      ; 7.343 ns                ;
-; N/A   ; 126.94 MHz ( period = 7.878 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[4]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[14] ; pclk       ; pclk     ; None                        ; None                      ; 6.994 ns                ;
-; N/A   ; 126.95 MHz ( period = 7.877 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[4]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[15] ; pclk       ; pclk     ; None                        ; None                      ; 6.993 ns                ;
-; N/A   ; 127.21 MHz ( period = 7.861 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[9]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[11] ; pclk       ; pclk     ; None                        ; None                      ; 7.152 ns                ;
-; N/A   ; 127.63 MHz ( period = 7.835 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[5]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[14] ; pclk       ; pclk     ; None                        ; None                      ; 6.951 ns                ;
-; N/A   ; 127.65 MHz ( period = 7.834 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[5]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[15] ; pclk       ; pclk     ; None                        ; None                      ; 6.950 ns                ;
-; N/A   ; 127.67 MHz ( period = 7.833 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[11] ; memoryaddressor:menaddr|WideCounter:w_count1|q[12] ; pclk       ; pclk     ; None                        ; None                      ; 7.787 ns                ;
-; N/A   ; 128.22 MHz ( period = 7.799 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[1]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[6]  ; pclk       ; pclk     ; None                        ; None                      ; 7.245 ns                ;
-; N/A   ; 128.60 MHz ( period = 7.776 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[9]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[10] ; pclk       ; pclk     ; None                        ; None                      ; 7.067 ns                ;
-; N/A   ; 128.63 MHz ( period = 7.774 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[6]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[6]  ; pclk       ; pclk     ; None                        ; None                      ; 7.065 ns                ;
-; N/A   ; 129.13 MHz ( period = 7.744 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[2]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[6]  ; pclk       ; pclk     ; None                        ; None                      ; 7.190 ns                ;
-; N/A   ; 129.27 MHz ( period = 7.736 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[3]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[3]  ; pclk       ; pclk     ; None                        ; None                      ; 7.027 ns                ;
-; N/A   ; 129.50 MHz ( period = 7.722 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[8]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[9]  ; pclk       ; pclk     ; None                        ; None                      ; 7.013 ns                ;
-; N/A   ; 130.07 MHz ( period = 7.688 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[10] ; memoryaddressor:menaddr|WideCounter:w_count1|q[12] ; pclk       ; pclk     ; None                        ; None                      ; 7.642 ns                ;
-; N/A   ; 131.06 MHz ( period = 7.630 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[5]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[5]  ; pclk       ; pclk     ; None                        ; None                      ; 6.921 ns                ;
-; N/A   ; 131.89 MHz ( period = 7.582 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[8]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[14] ; pclk       ; pclk     ; None                        ; None                      ; 6.698 ns                ;
-; N/A   ; 131.91 MHz ( period = 7.581 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[8]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[15] ; pclk       ; pclk     ; None                        ; None                      ; 6.697 ns                ;
-; N/A   ; 132.66 MHz ( period = 7.538 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[10] ; memoryaddressor:menaddr|WideCounter:w_count1|q[11] ; pclk       ; pclk     ; None                        ; None                      ; 6.829 ns                ;
-; N/A   ; 132.84 MHz ( period = 7.528 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[0]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[4]  ; pclk       ; pclk     ; None                        ; None                      ; 6.974 ns                ;
-; N/A   ; 134.43 MHz ( period = 7.439 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[1]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[3]  ; pclk       ; pclk     ; None                        ; None                      ; 6.885 ns                ;
-; N/A   ; 134.61 MHz ( period = 7.429 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[1]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[10] ; pclk       ; pclk     ; None                        ; None                      ; 6.875 ns                ;
-; N/A   ; 134.81 MHz ( period = 7.418 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[1]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[12] ; pclk       ; pclk     ; None                        ; None                      ; 7.527 ns                ;
-; N/A   ; 135.30 MHz ( period = 7.391 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[1]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[11] ; pclk       ; pclk     ; None                        ; None                      ; 6.837 ns                ;
-; N/A   ; 135.43 MHz ( period = 7.384 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[2]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[3]  ; pclk       ; pclk     ; None                        ; None                      ; 6.830 ns                ;
-; N/A   ; 135.61 MHz ( period = 7.374 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[2]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[10] ; pclk       ; pclk     ; None                        ; None                      ; 6.820 ns                ;
-; N/A   ; 135.61 MHz ( period = 7.374 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[1]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[13] ; pclk       ; pclk     ; None                        ; None                      ; 7.483 ns                ;
-; N/A   ; 135.81 MHz ( period = 7.363 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[2]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[12] ; pclk       ; pclk     ; None                        ; None                      ; 7.472 ns                ;
-; N/A   ; 135.83 MHz ( period = 7.362 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[9]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[14] ; pclk       ; pclk     ; None                        ; None                      ; 6.478 ns                ;
-; N/A   ; 135.85 MHz ( period = 7.361 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[9]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[15] ; pclk       ; pclk     ; None                        ; None                      ; 6.477 ns                ;
-; N/A   ; 136.20 MHz ( period = 7.342 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[1]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[5]  ; pclk       ; pclk     ; None                        ; None                      ; 6.788 ns                ;
-; N/A   ; 136.20 MHz ( period = 7.342 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[6]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[14] ; pclk       ; pclk     ; None                        ; None                      ; 6.458 ns                ;
-; N/A   ; 136.22 MHz ( period = 7.341 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[6]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[15] ; pclk       ; pclk     ; None                        ; None                      ; 6.457 ns                ;
-; N/A   ; 136.31 MHz ( period = 7.336 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[2]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[11] ; pclk       ; pclk     ; None                        ; None                      ; 6.782 ns                ;
-; N/A   ; 136.52 MHz ( period = 7.325 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[7]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[14] ; pclk       ; pclk     ; None                        ; None                      ; 6.441 ns                ;
-; N/A   ; 136.54 MHz ( period = 7.324 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[7]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[15] ; pclk       ; pclk     ; None                        ; None                      ; 6.440 ns                ;
-; N/A   ; 136.63 MHz ( period = 7.319 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[2]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[13] ; pclk       ; pclk     ; None                        ; None                      ; 7.428 ns                ;
-; N/A   ; 137.23 MHz ( period = 7.287 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[2]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[5]  ; pclk       ; pclk     ; None                        ; None                      ; 6.733 ns                ;
-; N/A   ; 137.40 MHz ( period = 7.278 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[1]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[9]  ; pclk       ; pclk     ; None                        ; None                      ; 6.724 ns                ;
-; N/A   ; 138.45 MHz ( period = 7.223 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[2]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[9]  ; pclk       ; pclk     ; None                        ; None                      ; 6.669 ns                ;
-; N/A   ; 138.62 MHz ( period = 7.214 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[1]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[8]  ; pclk       ; pclk     ; None                        ; None                      ; 6.660 ns                ;
-; N/A   ; 139.20 MHz ( period = 7.184 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[11] ; memoryaddressor:menaddr|WideCounter:w_count1|q[14] ; pclk       ; pclk     ; None                        ; None                      ; 6.300 ns                ;
-; N/A   ; 139.22 MHz ( period = 7.183 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[11] ; memoryaddressor:menaddr|WideCounter:w_count1|q[15] ; pclk       ; pclk     ; None                        ; None                      ; 6.299 ns                ;
-; N/A   ; 139.68 MHz ( period = 7.159 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[2]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[8]  ; pclk       ; pclk     ; None                        ; None                      ; 6.605 ns                ;
-; N/A   ; 141.78 MHz ( period = 7.053 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[4]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[4]  ; pclk       ; pclk     ; None                        ; None                      ; 6.344 ns                ;
-; N/A   ; 142.07 MHz ( period = 7.039 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[10] ; memoryaddressor:menaddr|WideCounter:w_count1|q[14] ; pclk       ; pclk     ; None                        ; None                      ; 6.155 ns                ;
-; N/A   ; 142.09 MHz ( period = 7.038 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[10] ; memoryaddressor:menaddr|WideCounter:w_count1|q[15] ; pclk       ; pclk     ; None                        ; None                      ; 6.154 ns                ;
-; N/A   ; 142.49 MHz ( period = 7.018 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[0]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[14] ; pclk       ; pclk     ; None                        ; None                      ; 6.289 ns                ;
-; N/A   ; 142.51 MHz ( period = 7.017 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[0]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[15] ; pclk       ; pclk     ; None                        ; None                      ; 6.288 ns                ;
-; N/A   ; 144.36 MHz ( period = 6.927 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[11] ; memoryaddressor:menaddr|WideCounter:w_count1|q[11] ; pclk       ; pclk     ; None                        ; None                      ; 6.218 ns                ;
-; N/A   ; 146.09 MHz ( period = 6.845 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[1]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[4]  ; pclk       ; pclk     ; None                        ; None                      ; 6.291 ns                ;
-; N/A   ; 146.99 MHz ( period = 6.803 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[9]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[9]  ; pclk       ; pclk     ; None                        ; None                      ; 6.094 ns                ;
-; N/A   ; 147.28 MHz ( period = 6.790 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[2]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[4]  ; pclk       ; pclk     ; None                        ; None                      ; 6.236 ns                ;
-; N/A   ; 147.51 MHz ( period = 6.779 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[8]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[8]  ; pclk       ; pclk     ; None                        ; None                      ; 6.070 ns                ;
-; N/A   ; 148.06 MHz ( period = 6.754 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[10] ; memoryaddressor:menaddr|WideCounter:w_count1|q[10] ; pclk       ; pclk     ; None                        ; None                      ; 6.045 ns                ;
-; N/A   ; 152.84 MHz ( period = 6.543 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[0]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[0]  ; pclk       ; pclk     ; None                        ; None                      ; 5.834 ns                ;
-; N/A   ; 157.85 MHz ( period = 6.335 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[1]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[14] ; pclk       ; pclk     ; None                        ; None                      ; 5.606 ns                ;
-; N/A   ; 157.88 MHz ( period = 6.334 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[1]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[15] ; pclk       ; pclk     ; None                        ; None                      ; 5.605 ns                ;
-; N/A   ; 159.24 MHz ( period = 6.280 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[2]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[14] ; pclk       ; pclk     ; None                        ; None                      ; 5.551 ns                ;
-; N/A   ; 159.26 MHz ( period = 6.279 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[2]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[15] ; pclk       ; pclk     ; None                        ; None                      ; 5.550 ns                ;
-; N/A   ; 167.17 MHz ( period = 5.982 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[0]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[2]  ; pclk       ; pclk     ; None                        ; None                      ; 5.273 ns                ;
-; N/A   ; 179.76 MHz ( period = 5.563 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[0]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[1]  ; pclk       ; pclk     ; None                        ; None                      ; 4.854 ns                ;
-; N/A   ; 188.71 MHz ( period = 5.299 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[1]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[2]  ; pclk       ; pclk     ; None                        ; None                      ; 4.590 ns                ;
-; N/A   ; 188.82 MHz ( period = 5.296 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[14] ; memoryaddressor:menaddr|WideCounter:w_count1|q[15] ; pclk       ; pclk     ; None                        ; None                      ; 4.587 ns                ;
-; N/A   ; 202.55 MHz ( period = 4.937 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[1]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[1]  ; pclk       ; pclk     ; None                        ; None                      ; 4.228 ns                ;
-; N/A   ; 223.41 MHz ( period = 4.476 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[2]  ; memoryaddressor:menaddr|WideCounter:w_count1|q[2]  ; pclk       ; pclk     ; None                        ; None                      ; 3.767 ns                ;
-; N/A   ; 223.46 MHz ( period = 4.475 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[14] ; memoryaddressor:menaddr|WideCounter:w_count1|q[14] ; pclk       ; pclk     ; None                        ; None                      ; 3.766 ns                ;
-; N/A   ; 245.52 MHz ( period = 4.073 ns ) ; TimingManager:timemanager|enC                      ; TimingManager:timemanager|Sig_En                   ; pclk       ; pclk     ; None                        ; None                      ; 3.364 ns                ;
-; N/A   ; 254.13 MHz ( period = 3.935 ns ) ; memoryaddressor:menaddr|WideCounter:w_count1|q[15] ; memoryaddressor:menaddr|WideCounter:w_count1|q[15] ; pclk       ; pclk     ; None                        ; None                      ; 3.226 ns                ;
-; N/A   ; 288.18 MHz ( period = 3.470 ns ) ; TimingManager:timemanager|enC                      ; TimingManager:timemanager|res                      ; pclk       ; pclk     ; None                        ; None                      ; 2.761 ns                ;
-+-------+----------------------------------+----------------------------------------------------+----------------------------------------------------+------------+----------+-----------------------------+---------------------------+-------------------------+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Clock Setup: 'clk'                                                                                                                                                                                                                         ;
++-------+------------------------------------------------+-----------------------------------+-----------------------------------+------------+----------+-----------------------------+---------------------------+-------------------------+
+; Slack ; Actual fmax (period)                           ; From                              ; To                                ; From Clock ; To Clock ; Required Setup Relationship ; Required Longest P2P Time ; Actual Longest P2P Time ;
++-------+------------------------------------------------+-----------------------------------+-----------------------------------+------------+----------+-----------------------------+---------------------------+-------------------------+
+; N/A   ; Restricted to 304.04 MHz ( period = 3.289 ns ) ; clkdivider:clkdivider0|t_count[0] ; clkdivider:clkdivider0|t_count[0] ; clk        ; clk      ; None                        ; None                      ; 1.502 ns                ;
+; N/A   ; Restricted to 304.04 MHz ( period = 3.289 ns ) ; clkdivider:clkdivider0|t_count[1] ; clkdivider:clkdivider0|t_count[1] ; clk        ; clk      ; None                        ; None                      ; 1.484 ns                ;
++-------+------------------------------------------------+-----------------------------------+-----------------------------------+------------+----------+-----------------------------+---------------------------+-------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Clock Setup: 'pclk'                                                                                                                                                                                                                                  ;
++-------+------------------------------------------------+----------------------------------------+----------------------------------------+------------+----------+-----------------------------+---------------------------+-------------------------+
+; Slack ; Actual fmax (period)                           ; From                                   ; To                                     ; From Clock ; To Clock ; Required Setup Relationship ; Required Longest P2P Time ; Actual Longest P2P Time ;
++-------+------------------------------------------------+----------------------------------------+----------------------------------------+------------+----------+-----------------------------+---------------------------+-------------------------+
+; N/A   ; 55.44 MHz ( period = 18.038 ns )               ; TimingManager:timemanager|foo[6]       ; TimingManager:timemanager|Sig_En       ; pclk       ; pclk     ; None                        ; None                      ; 1.991 ns                ;
+; N/A   ; 58.73 MHz ( period = 17.028 ns )               ; TimingManager:timemanager|foo[6]       ; TimingManager:timemanager|res          ; pclk       ; pclk     ; None                        ; None                      ; 1.486 ns                ;
+; N/A   ; 134.88 MHz ( period = 7.414 ns )               ; TimingManager:timemanager|Sig_En       ; memoryaddressor:menaddr|write_state    ; pclk       ; pclk     ; None                        ; None                      ; 2.998 ns                ;
+; N/A   ; 201.09 MHz ( period = 4.973 ns )               ; memoryaddressor:menaddr|preAddress[3]  ; memoryaddressor:menaddr|preAddress[8]  ; pclk       ; pclk     ; None                        ; None                      ; 4.264 ns                ;
+; N/A   ; 201.09 MHz ( period = 4.973 ns )               ; memoryaddressor:menaddr|preAddress[3]  ; memoryaddressor:menaddr|preAddress[9]  ; pclk       ; pclk     ; None                        ; None                      ; 4.264 ns                ;
+; N/A   ; 201.09 MHz ( period = 4.973 ns )               ; memoryaddressor:menaddr|preAddress[3]  ; memoryaddressor:menaddr|preAddress[10] ; pclk       ; pclk     ; None                        ; None                      ; 4.264 ns                ;
+; N/A   ; 201.09 MHz ( period = 4.973 ns )               ; memoryaddressor:menaddr|preAddress[3]  ; memoryaddressor:menaddr|preAddress[11] ; pclk       ; pclk     ; None                        ; None                      ; 4.264 ns                ;
+; N/A   ; 201.09 MHz ( period = 4.973 ns )               ; memoryaddressor:menaddr|preAddress[3]  ; memoryaddressor:menaddr|preAddress[12] ; pclk       ; pclk     ; None                        ; None                      ; 4.264 ns                ;
+; N/A   ; 201.61 MHz ( period = 4.960 ns )               ; memoryaddressor:menaddr|preAddress[3]  ; memoryaddressor:menaddr|preAddress[13] ; pclk       ; pclk     ; None                        ; None                      ; 4.251 ns                ;
+; N/A   ; 201.61 MHz ( period = 4.960 ns )               ; memoryaddressor:menaddr|preAddress[3]  ; memoryaddressor:menaddr|preAddress[14] ; pclk       ; pclk     ; None                        ; None                      ; 4.251 ns                ;
+; N/A   ; 201.61 MHz ( period = 4.960 ns )               ; memoryaddressor:menaddr|preAddress[3]  ; memoryaddressor:menaddr|preAddress[15] ; pclk       ; pclk     ; None                        ; None                      ; 4.251 ns                ;
+; N/A   ; 206.14 MHz ( period = 4.851 ns )               ; memoryaddressor:menaddr|preAddress[4]  ; memoryaddressor:menaddr|preAddress[8]  ; pclk       ; pclk     ; None                        ; None                      ; 4.142 ns                ;
+; N/A   ; 206.14 MHz ( period = 4.851 ns )               ; memoryaddressor:menaddr|preAddress[4]  ; memoryaddressor:menaddr|preAddress[9]  ; pclk       ; pclk     ; None                        ; None                      ; 4.142 ns                ;
+; N/A   ; 206.14 MHz ( period = 4.851 ns )               ; memoryaddressor:menaddr|preAddress[4]  ; memoryaddressor:menaddr|preAddress[10] ; pclk       ; pclk     ; None                        ; None                      ; 4.142 ns                ;
+; N/A   ; 206.14 MHz ( period = 4.851 ns )               ; memoryaddressor:menaddr|preAddress[4]  ; memoryaddressor:menaddr|preAddress[11] ; pclk       ; pclk     ; None                        ; None                      ; 4.142 ns                ;
+; N/A   ; 206.14 MHz ( period = 4.851 ns )               ; memoryaddressor:menaddr|preAddress[4]  ; memoryaddressor:menaddr|preAddress[12] ; pclk       ; pclk     ; None                        ; None                      ; 4.142 ns                ;
+; N/A   ; 206.70 MHz ( period = 4.838 ns )               ; memoryaddressor:menaddr|preAddress[4]  ; memoryaddressor:menaddr|preAddress[13] ; pclk       ; pclk     ; None                        ; None                      ; 4.129 ns                ;
+; N/A   ; 206.70 MHz ( period = 4.838 ns )               ; memoryaddressor:menaddr|preAddress[4]  ; memoryaddressor:menaddr|preAddress[14] ; pclk       ; pclk     ; None                        ; None                      ; 4.129 ns                ;
+; N/A   ; 206.70 MHz ( period = 4.838 ns )               ; memoryaddressor:menaddr|preAddress[4]  ; memoryaddressor:menaddr|preAddress[15] ; pclk       ; pclk     ; None                        ; None                      ; 4.129 ns                ;
+; N/A   ; 208.07 MHz ( period = 4.806 ns )               ; memoryaddressor:menaddr|preAddress[1]  ; memoryaddressor:menaddr|preAddress[8]  ; pclk       ; pclk     ; None                        ; None                      ; 4.097 ns                ;
+; N/A   ; 208.07 MHz ( period = 4.806 ns )               ; memoryaddressor:menaddr|preAddress[1]  ; memoryaddressor:menaddr|preAddress[9]  ; pclk       ; pclk     ; None                        ; None                      ; 4.097 ns                ;
+; N/A   ; 208.07 MHz ( period = 4.806 ns )               ; memoryaddressor:menaddr|preAddress[1]  ; memoryaddressor:menaddr|preAddress[10] ; pclk       ; pclk     ; None                        ; None                      ; 4.097 ns                ;
+; N/A   ; 208.07 MHz ( period = 4.806 ns )               ; memoryaddressor:menaddr|preAddress[1]  ; memoryaddressor:menaddr|preAddress[11] ; pclk       ; pclk     ; None                        ; None                      ; 4.097 ns                ;
+; N/A   ; 208.07 MHz ( period = 4.806 ns )               ; memoryaddressor:menaddr|preAddress[1]  ; memoryaddressor:menaddr|preAddress[12] ; pclk       ; pclk     ; None                        ; None                      ; 4.097 ns                ;
+; N/A   ; 208.64 MHz ( period = 4.793 ns )               ; memoryaddressor:menaddr|preAddress[1]  ; memoryaddressor:menaddr|preAddress[13] ; pclk       ; pclk     ; None                        ; None                      ; 4.084 ns                ;
+; N/A   ; 208.64 MHz ( period = 4.793 ns )               ; memoryaddressor:menaddr|preAddress[1]  ; memoryaddressor:menaddr|preAddress[14] ; pclk       ; pclk     ; None                        ; None                      ; 4.084 ns                ;
+; N/A   ; 208.64 MHz ( period = 4.793 ns )               ; memoryaddressor:menaddr|preAddress[1]  ; memoryaddressor:menaddr|preAddress[15] ; pclk       ; pclk     ; None                        ; None                      ; 4.084 ns                ;
+; N/A   ; 214.87 MHz ( period = 4.654 ns )               ; memoryaddressor:menaddr|preAddress[2]  ; memoryaddressor:menaddr|preAddress[8]  ; pclk       ; pclk     ; None                        ; None                      ; 3.945 ns                ;
+; N/A   ; 214.87 MHz ( period = 4.654 ns )               ; memoryaddressor:menaddr|preAddress[2]  ; memoryaddressor:menaddr|preAddress[9]  ; pclk       ; pclk     ; None                        ; None                      ; 3.945 ns                ;
+; N/A   ; 214.87 MHz ( period = 4.654 ns )               ; memoryaddressor:menaddr|preAddress[2]  ; memoryaddressor:menaddr|preAddress[10] ; pclk       ; pclk     ; None                        ; None                      ; 3.945 ns                ;
+; N/A   ; 214.87 MHz ( period = 4.654 ns )               ; memoryaddressor:menaddr|preAddress[2]  ; memoryaddressor:menaddr|preAddress[11] ; pclk       ; pclk     ; None                        ; None                      ; 3.945 ns                ;
+; N/A   ; 214.87 MHz ( period = 4.654 ns )               ; memoryaddressor:menaddr|preAddress[2]  ; memoryaddressor:menaddr|preAddress[12] ; pclk       ; pclk     ; None                        ; None                      ; 3.945 ns                ;
+; N/A   ; 215.47 MHz ( period = 4.641 ns )               ; memoryaddressor:menaddr|preAddress[2]  ; memoryaddressor:menaddr|preAddress[13] ; pclk       ; pclk     ; None                        ; None                      ; 3.932 ns                ;
+; N/A   ; 215.47 MHz ( period = 4.641 ns )               ; memoryaddressor:menaddr|preAddress[2]  ; memoryaddressor:menaddr|preAddress[14] ; pclk       ; pclk     ; None                        ; None                      ; 3.932 ns                ;
+; N/A   ; 215.47 MHz ( period = 4.641 ns )               ; memoryaddressor:menaddr|preAddress[2]  ; memoryaddressor:menaddr|preAddress[15] ; pclk       ; pclk     ; None                        ; None                      ; 3.932 ns                ;
+; N/A   ; 216.68 MHz ( period = 4.615 ns )               ; memoryaddressor:menaddr|preAddress[0]  ; memoryaddressor:menaddr|preAddress[8]  ; pclk       ; pclk     ; None                        ; None                      ; 3.906 ns                ;
+; N/A   ; 216.68 MHz ( period = 4.615 ns )               ; memoryaddressor:menaddr|preAddress[0]  ; memoryaddressor:menaddr|preAddress[9]  ; pclk       ; pclk     ; None                        ; None                      ; 3.906 ns                ;
+; N/A   ; 216.68 MHz ( period = 4.615 ns )               ; memoryaddressor:menaddr|preAddress[0]  ; memoryaddressor:menaddr|preAddress[10] ; pclk       ; pclk     ; None                        ; None                      ; 3.906 ns                ;
+; N/A   ; 216.68 MHz ( period = 4.615 ns )               ; memoryaddressor:menaddr|preAddress[0]  ; memoryaddressor:menaddr|preAddress[11] ; pclk       ; pclk     ; None                        ; None                      ; 3.906 ns                ;
+; N/A   ; 216.68 MHz ( period = 4.615 ns )               ; memoryaddressor:menaddr|preAddress[0]  ; memoryaddressor:menaddr|preAddress[12] ; pclk       ; pclk     ; None                        ; None                      ; 3.906 ns                ;
+; N/A   ; 217.30 MHz ( period = 4.602 ns )               ; memoryaddressor:menaddr|preAddress[0]  ; memoryaddressor:menaddr|preAddress[13] ; pclk       ; pclk     ; None                        ; None                      ; 3.893 ns                ;
+; N/A   ; 217.30 MHz ( period = 4.602 ns )               ; memoryaddressor:menaddr|preAddress[0]  ; memoryaddressor:menaddr|preAddress[14] ; pclk       ; pclk     ; None                        ; None                      ; 3.893 ns                ;
+; N/A   ; 217.30 MHz ( period = 4.602 ns )               ; memoryaddressor:menaddr|preAddress[0]  ; memoryaddressor:menaddr|preAddress[15] ; pclk       ; pclk     ; None                        ; None                      ; 3.893 ns                ;
+; N/A   ; 217.63 MHz ( period = 4.595 ns )               ; memoryaddressor:menaddr|preAddress[6]  ; memoryaddressor:menaddr|preAddress[8]  ; pclk       ; pclk     ; None                        ; None                      ; 3.886 ns                ;
+; N/A   ; 217.63 MHz ( period = 4.595 ns )               ; memoryaddressor:menaddr|preAddress[6]  ; memoryaddressor:menaddr|preAddress[9]  ; pclk       ; pclk     ; None                        ; None                      ; 3.886 ns                ;
+; N/A   ; 217.63 MHz ( period = 4.595 ns )               ; memoryaddressor:menaddr|preAddress[6]  ; memoryaddressor:menaddr|preAddress[10] ; pclk       ; pclk     ; None                        ; None                      ; 3.886 ns                ;
+; N/A   ; 217.63 MHz ( period = 4.595 ns )               ; memoryaddressor:menaddr|preAddress[6]  ; memoryaddressor:menaddr|preAddress[11] ; pclk       ; pclk     ; None                        ; None                      ; 3.886 ns                ;
+; N/A   ; 217.63 MHz ( period = 4.595 ns )               ; memoryaddressor:menaddr|preAddress[6]  ; memoryaddressor:menaddr|preAddress[12] ; pclk       ; pclk     ; None                        ; None                      ; 3.886 ns                ;
+; N/A   ; 218.25 MHz ( period = 4.582 ns )               ; memoryaddressor:menaddr|preAddress[6]  ; memoryaddressor:menaddr|preAddress[13] ; pclk       ; pclk     ; None                        ; None                      ; 3.873 ns                ;
+; N/A   ; 218.25 MHz ( period = 4.582 ns )               ; memoryaddressor:menaddr|preAddress[6]  ; memoryaddressor:menaddr|preAddress[14] ; pclk       ; pclk     ; None                        ; None                      ; 3.873 ns                ;
+; N/A   ; 218.25 MHz ( period = 4.582 ns )               ; memoryaddressor:menaddr|preAddress[6]  ; memoryaddressor:menaddr|preAddress[15] ; pclk       ; pclk     ; None                        ; None                      ; 3.873 ns                ;
+; N/A   ; 222.42 MHz ( period = 4.496 ns )               ; memoryaddressor:menaddr|preAddress[5]  ; memoryaddressor:menaddr|preAddress[8]  ; pclk       ; pclk     ; None                        ; None                      ; 3.787 ns                ;
+; N/A   ; 222.42 MHz ( period = 4.496 ns )               ; memoryaddressor:menaddr|preAddress[5]  ; memoryaddressor:menaddr|preAddress[9]  ; pclk       ; pclk     ; None                        ; None                      ; 3.787 ns                ;
+; N/A   ; 222.42 MHz ( period = 4.496 ns )               ; memoryaddressor:menaddr|preAddress[5]  ; memoryaddressor:menaddr|preAddress[10] ; pclk       ; pclk     ; None                        ; None                      ; 3.787 ns                ;
+; N/A   ; 222.42 MHz ( period = 4.496 ns )               ; memoryaddressor:menaddr|preAddress[5]  ; memoryaddressor:menaddr|preAddress[11] ; pclk       ; pclk     ; None                        ; None                      ; 3.787 ns                ;
+; N/A   ; 222.42 MHz ( period = 4.496 ns )               ; memoryaddressor:menaddr|preAddress[5]  ; memoryaddressor:menaddr|preAddress[12] ; pclk       ; pclk     ; None                        ; None                      ; 3.787 ns                ;
+; N/A   ; 223.06 MHz ( period = 4.483 ns )               ; memoryaddressor:menaddr|preAddress[5]  ; memoryaddressor:menaddr|preAddress[13] ; pclk       ; pclk     ; None                        ; None                      ; 3.774 ns                ;
+; N/A   ; 223.06 MHz ( period = 4.483 ns )               ; memoryaddressor:menaddr|preAddress[5]  ; memoryaddressor:menaddr|preAddress[14] ; pclk       ; pclk     ; None                        ; None                      ; 3.774 ns                ;
+; N/A   ; 223.06 MHz ( period = 4.483 ns )               ; memoryaddressor:menaddr|preAddress[5]  ; memoryaddressor:menaddr|preAddress[15] ; pclk       ; pclk     ; None                        ; None                      ; 3.774 ns                ;
+; N/A   ; 229.73 MHz ( period = 4.353 ns )               ; memoryaddressor:menaddr|preAddress[8]  ; memoryaddressor:menaddr|preAddress[13] ; pclk       ; pclk     ; None                        ; None                      ; 3.644 ns                ;
+; N/A   ; 229.73 MHz ( period = 4.353 ns )               ; memoryaddressor:menaddr|preAddress[8]  ; memoryaddressor:menaddr|preAddress[14] ; pclk       ; pclk     ; None                        ; None                      ; 3.644 ns                ;
+; N/A   ; 229.73 MHz ( period = 4.353 ns )               ; memoryaddressor:menaddr|preAddress[8]  ; memoryaddressor:menaddr|preAddress[15] ; pclk       ; pclk     ; None                        ; None                      ; 3.644 ns                ;
+; N/A   ; 230.20 MHz ( period = 4.344 ns )               ; memoryaddressor:menaddr|preAddress[7]  ; memoryaddressor:menaddr|preAddress[8]  ; pclk       ; pclk     ; None                        ; None                      ; 3.635 ns                ;
+; N/A   ; 230.20 MHz ( period = 4.344 ns )               ; memoryaddressor:menaddr|preAddress[7]  ; memoryaddressor:menaddr|preAddress[9]  ; pclk       ; pclk     ; None                        ; None                      ; 3.635 ns                ;
+; N/A   ; 230.20 MHz ( period = 4.344 ns )               ; memoryaddressor:menaddr|preAddress[7]  ; memoryaddressor:menaddr|preAddress[10] ; pclk       ; pclk     ; None                        ; None                      ; 3.635 ns                ;
+; N/A   ; 230.20 MHz ( period = 4.344 ns )               ; memoryaddressor:menaddr|preAddress[7]  ; memoryaddressor:menaddr|preAddress[11] ; pclk       ; pclk     ; None                        ; None                      ; 3.635 ns                ;
+; N/A   ; 230.20 MHz ( period = 4.344 ns )               ; memoryaddressor:menaddr|preAddress[7]  ; memoryaddressor:menaddr|preAddress[12] ; pclk       ; pclk     ; None                        ; None                      ; 3.635 ns                ;
+; N/A   ; 230.89 MHz ( period = 4.331 ns )               ; memoryaddressor:menaddr|preAddress[7]  ; memoryaddressor:menaddr|preAddress[13] ; pclk       ; pclk     ; None                        ; None                      ; 3.622 ns                ;
+; N/A   ; 230.89 MHz ( period = 4.331 ns )               ; memoryaddressor:menaddr|preAddress[7]  ; memoryaddressor:menaddr|preAddress[14] ; pclk       ; pclk     ; None                        ; None                      ; 3.622 ns                ;
+; N/A   ; 230.89 MHz ( period = 4.331 ns )               ; memoryaddressor:menaddr|preAddress[7]  ; memoryaddressor:menaddr|preAddress[15] ; pclk       ; pclk     ; None                        ; None                      ; 3.622 ns                ;
+; N/A   ; 236.35 MHz ( period = 4.231 ns )               ; memoryaddressor:menaddr|preAddress[9]  ; memoryaddressor:menaddr|preAddress[13] ; pclk       ; pclk     ; None                        ; None                      ; 3.522 ns                ;
+; N/A   ; 236.35 MHz ( period = 4.231 ns )               ; memoryaddressor:menaddr|preAddress[9]  ; memoryaddressor:menaddr|preAddress[14] ; pclk       ; pclk     ; None                        ; None                      ; 3.522 ns                ;
+; N/A   ; 236.35 MHz ( period = 4.231 ns )               ; memoryaddressor:menaddr|preAddress[9]  ; memoryaddressor:menaddr|preAddress[15] ; pclk       ; pclk     ; None                        ; None                      ; 3.522 ns                ;
+; N/A   ; 238.21 MHz ( period = 4.198 ns )               ; memoryaddressor:menaddr|preAddress[1]  ; memoryaddressor:menaddr|preAddress[3]  ; pclk       ; pclk     ; None                        ; None                      ; 3.489 ns                ;
+; N/A   ; 238.21 MHz ( period = 4.198 ns )               ; memoryaddressor:menaddr|preAddress[1]  ; memoryaddressor:menaddr|preAddress[4]  ; pclk       ; pclk     ; None                        ; None                      ; 3.489 ns                ;
+; N/A   ; 238.21 MHz ( period = 4.198 ns )               ; memoryaddressor:menaddr|preAddress[1]  ; memoryaddressor:menaddr|preAddress[5]  ; pclk       ; pclk     ; None                        ; None                      ; 3.489 ns                ;
+; N/A   ; 238.21 MHz ( period = 4.198 ns )               ; memoryaddressor:menaddr|preAddress[1]  ; memoryaddressor:menaddr|preAddress[6]  ; pclk       ; pclk     ; None                        ; None                      ; 3.489 ns                ;
+; N/A   ; 238.21 MHz ( period = 4.198 ns )               ; memoryaddressor:menaddr|preAddress[1]  ; memoryaddressor:menaddr|preAddress[7]  ; pclk       ; pclk     ; None                        ; None                      ; 3.489 ns                ;
+; N/A   ; 238.72 MHz ( period = 4.189 ns )               ; memoryaddressor:menaddr|preAddress[11] ; memoryaddressor:menaddr|preAddress[13] ; pclk       ; pclk     ; None                        ; None                      ; 3.480 ns                ;
+; N/A   ; 238.72 MHz ( period = 4.189 ns )               ; memoryaddressor:menaddr|preAddress[11] ; memoryaddressor:menaddr|preAddress[14] ; pclk       ; pclk     ; None                        ; None                      ; 3.480 ns                ;
+; N/A   ; 238.72 MHz ( period = 4.189 ns )               ; memoryaddressor:menaddr|preAddress[11] ; memoryaddressor:menaddr|preAddress[15] ; pclk       ; pclk     ; None                        ; None                      ; 3.480 ns                ;
+; N/A   ; 243.37 MHz ( period = 4.109 ns )               ; memoryaddressor:menaddr|preAddress[3]  ; memoryaddressor:menaddr|preAddress[7]  ; pclk       ; pclk     ; None                        ; None                      ; 3.400 ns                ;
+; N/A   ; 243.43 MHz ( period = 4.108 ns )               ; memoryaddressor:menaddr|preAddress[10] ; memoryaddressor:menaddr|preAddress[13] ; pclk       ; pclk     ; None                        ; None                      ; 3.399 ns                ;
+; N/A   ; 243.43 MHz ( period = 4.108 ns )               ; memoryaddressor:menaddr|preAddress[10] ; memoryaddressor:menaddr|preAddress[14] ; pclk       ; pclk     ; None                        ; None                      ; 3.399 ns                ;
+; N/A   ; 243.43 MHz ( period = 4.108 ns )               ; memoryaddressor:menaddr|preAddress[10] ; memoryaddressor:menaddr|preAddress[15] ; pclk       ; pclk     ; None                        ; None                      ; 3.399 ns                ;
+; N/A   ; 247.16 MHz ( period = 4.046 ns )               ; memoryaddressor:menaddr|preAddress[2]  ; memoryaddressor:menaddr|preAddress[3]  ; pclk       ; pclk     ; None                        ; None                      ; 3.337 ns                ;
+; N/A   ; 247.16 MHz ( period = 4.046 ns )               ; memoryaddressor:menaddr|preAddress[2]  ; memoryaddressor:menaddr|preAddress[4]  ; pclk       ; pclk     ; None                        ; None                      ; 3.337 ns                ;
+; N/A   ; 247.16 MHz ( period = 4.046 ns )               ; memoryaddressor:menaddr|preAddress[2]  ; memoryaddressor:menaddr|preAddress[5]  ; pclk       ; pclk     ; None                        ; None                      ; 3.337 ns                ;
+; N/A   ; 247.16 MHz ( period = 4.046 ns )               ; memoryaddressor:menaddr|preAddress[2]  ; memoryaddressor:menaddr|preAddress[6]  ; pclk       ; pclk     ; None                        ; None                      ; 3.337 ns                ;
+; N/A   ; 247.16 MHz ( period = 4.046 ns )               ; memoryaddressor:menaddr|preAddress[2]  ; memoryaddressor:menaddr|preAddress[7]  ; pclk       ; pclk     ; None                        ; None                      ; 3.337 ns                ;
+; N/A   ; 247.16 MHz ( period = 4.046 ns )               ; memoryaddressor:menaddr|preAddress[12] ; memoryaddressor:menaddr|preAddress[13] ; pclk       ; pclk     ; None                        ; None                      ; 3.337 ns                ;
+; N/A   ; 247.16 MHz ( period = 4.046 ns )               ; memoryaddressor:menaddr|preAddress[12] ; memoryaddressor:menaddr|preAddress[14] ; pclk       ; pclk     ; None                        ; None                      ; 3.337 ns                ;
+; N/A   ; 247.16 MHz ( period = 4.046 ns )               ; memoryaddressor:menaddr|preAddress[12] ; memoryaddressor:menaddr|preAddress[15] ; pclk       ; pclk     ; None                        ; None                      ; 3.337 ns                ;
+; N/A   ; 249.56 MHz ( period = 4.007 ns )               ; memoryaddressor:menaddr|preAddress[0]  ; memoryaddressor:menaddr|preAddress[3]  ; pclk       ; pclk     ; None                        ; None                      ; 3.298 ns                ;
+; N/A   ; 249.56 MHz ( period = 4.007 ns )               ; memoryaddressor:menaddr|preAddress[0]  ; memoryaddressor:menaddr|preAddress[4]  ; pclk       ; pclk     ; None                        ; None                      ; 3.298 ns                ;
+; N/A   ; 249.56 MHz ( period = 4.007 ns )               ; memoryaddressor:menaddr|preAddress[0]  ; memoryaddressor:menaddr|preAddress[5]  ; pclk       ; pclk     ; None                        ; None                      ; 3.298 ns                ;
+; N/A   ; 249.56 MHz ( period = 4.007 ns )               ; memoryaddressor:menaddr|preAddress[0]  ; memoryaddressor:menaddr|preAddress[6]  ; pclk       ; pclk     ; None                        ; None                      ; 3.298 ns                ;
+; N/A   ; 249.56 MHz ( period = 4.007 ns )               ; memoryaddressor:menaddr|preAddress[0]  ; memoryaddressor:menaddr|preAddress[7]  ; pclk       ; pclk     ; None                        ; None                      ; 3.298 ns                ;
+; N/A   ; 250.82 MHz ( period = 3.987 ns )               ; memoryaddressor:menaddr|preAddress[4]  ; memoryaddressor:menaddr|preAddress[7]  ; pclk       ; pclk     ; None                        ; None                      ; 3.278 ns                ;
+; N/A   ; 250.88 MHz ( period = 3.986 ns )               ; memoryaddressor:menaddr|preAddress[3]  ; memoryaddressor:menaddr|preAddress[6]  ; pclk       ; pclk     ; None                        ; None                      ; 3.277 ns                ;
+; N/A   ; 257.33 MHz ( period = 3.886 ns )               ; memoryaddressor:menaddr|preAddress[8]  ; memoryaddressor:menaddr|preAddress[12] ; pclk       ; pclk     ; None                        ; None                      ; 3.177 ns                ;
+; N/A   ; 258.80 MHz ( period = 3.864 ns )               ; memoryaddressor:menaddr|preAddress[4]  ; memoryaddressor:menaddr|preAddress[6]  ; pclk       ; pclk     ; None                        ; None                      ; 3.155 ns                ;
+; N/A   ; 258.87 MHz ( period = 3.863 ns )               ; memoryaddressor:menaddr|preAddress[3]  ; memoryaddressor:menaddr|preAddress[5]  ; pclk       ; pclk     ; None                        ; None                      ; 3.154 ns                ;
+; N/A   ; 258.87 MHz ( period = 3.863 ns )               ; memoryaddressor:menaddr|preAddress[13] ; memoryaddressor:menaddr|preAddress[15] ; pclk       ; pclk     ; None                        ; None                      ; 3.154 ns                ;
+; N/A   ; 265.67 MHz ( period = 3.764 ns )               ; memoryaddressor:menaddr|preAddress[9]  ; memoryaddressor:menaddr|preAddress[12] ; pclk       ; pclk     ; None                        ; None                      ; 3.055 ns                ;
+; N/A   ; 265.75 MHz ( period = 3.763 ns )               ; memoryaddressor:menaddr|preAddress[8]  ; memoryaddressor:menaddr|preAddress[11] ; pclk       ; pclk     ; None                        ; None                      ; 3.054 ns                ;
+; N/A   ; 267.31 MHz ( period = 3.741 ns )               ; memoryaddressor:menaddr|preAddress[4]  ; memoryaddressor:menaddr|preAddress[5]  ; pclk       ; pclk     ; None                        ; None                      ; 3.032 ns                ;
+; N/A   ; 267.31 MHz ( period = 3.741 ns )               ; memoryaddressor:menaddr|preAddress[14] ; memoryaddressor:menaddr|preAddress[15] ; pclk       ; pclk     ; None                        ; None                      ; 3.032 ns                ;
+; N/A   ; 267.38 MHz ( period = 3.740 ns )               ; memoryaddressor:menaddr|preAddress[3]  ; memoryaddressor:menaddr|preAddress[4]  ; pclk       ; pclk     ; None                        ; None                      ; 3.031 ns                ;
+; N/A   ; 267.38 MHz ( period = 3.740 ns )               ; memoryaddressor:menaddr|preAddress[13] ; memoryaddressor:menaddr|preAddress[14] ; pclk       ; pclk     ; None                        ; None                      ; 3.031 ns                ;
+; N/A   ; 268.02 MHz ( period = 3.731 ns )               ; memoryaddressor:menaddr|preAddress[1]  ; memoryaddressor:menaddr|preAddress[2]  ; pclk       ; pclk     ; None                        ; None                      ; 3.022 ns                ;
+; N/A   ; 268.02 MHz ( period = 3.731 ns )               ; memoryaddressor:menaddr|preAddress[6]  ; memoryaddressor:menaddr|preAddress[7]  ; pclk       ; pclk     ; None                        ; None                      ; 3.022 ns                ;
+; N/A   ; 268.67 MHz ( period = 3.722 ns )               ; memoryaddressor:menaddr|preAddress[11] ; memoryaddressor:menaddr|preAddress[12] ; pclk       ; pclk     ; None                        ; None                      ; 3.013 ns                ;
+; N/A   ; 274.65 MHz ( period = 3.641 ns )               ; memoryaddressor:menaddr|preAddress[9]  ; memoryaddressor:menaddr|preAddress[11] ; pclk       ; pclk     ; None                        ; None                      ; 2.932 ns                ;
+; N/A   ; 274.65 MHz ( period = 3.641 ns )               ; memoryaddressor:menaddr|preAddress[10] ; memoryaddressor:menaddr|preAddress[12] ; pclk       ; pclk     ; None                        ; None                      ; 2.932 ns                ;
+; N/A   ; 274.73 MHz ( period = 3.640 ns )               ; memoryaddressor:menaddr|preAddress[8]  ; memoryaddressor:menaddr|preAddress[10] ; pclk       ; pclk     ; None                        ; None                      ; 2.931 ns                ;
+; N/A   ; 275.33 MHz ( period = 3.632 ns )               ; memoryaddressor:menaddr|preAddress[5]  ; memoryaddressor:menaddr|preAddress[7]  ; pclk       ; pclk     ; None                        ; None                      ; 2.923 ns                ;
+; N/A   ; 282.49 MHz ( period = 3.540 ns )               ; memoryaddressor:menaddr|preAddress[0]  ; memoryaddressor:menaddr|preAddress[2]  ; pclk       ; pclk     ; None                        ; None                      ; 2.831 ns                ;
+; N/A   ; 284.25 MHz ( period = 3.518 ns )               ; memoryaddressor:menaddr|preAddress[9]  ; memoryaddressor:menaddr|preAddress[10] ; pclk       ; pclk     ; None                        ; None                      ; 2.809 ns                ;
+; N/A   ; 284.25 MHz ( period = 3.518 ns )               ; memoryaddressor:menaddr|preAddress[10] ; memoryaddressor:menaddr|preAddress[11] ; pclk       ; pclk     ; None                        ; None                      ; 2.809 ns                ;
+; N/A   ; 284.33 MHz ( period = 3.517 ns )               ; memoryaddressor:menaddr|preAddress[8]  ; memoryaddressor:menaddr|preAddress[9]  ; pclk       ; pclk     ; None                        ; None                      ; 2.808 ns                ;
+; N/A   ; 284.98 MHz ( period = 3.509 ns )               ; memoryaddressor:menaddr|preAddress[5]  ; memoryaddressor:menaddr|preAddress[6]  ; pclk       ; pclk     ; None                        ; None                      ; 2.800 ns                ;
+; N/A   ; Restricted to 304.04 MHz ( period = 3.289 ns ) ; memoryaddressor:menaddr|preAddress[2]  ; memoryaddressor:menaddr|preAddress[2]  ; pclk       ; pclk     ; None                        ; None                      ; 2.076 ns                ;
+; N/A   ; Restricted to 304.04 MHz ( period = 3.289 ns ) ; memoryaddressor:menaddr|preAddress[4]  ; memoryaddressor:menaddr|preAddress[4]  ; pclk       ; pclk     ; None                        ; None                      ; 2.076 ns                ;
+; N/A   ; Restricted to 304.04 MHz ( period = 3.289 ns ) ; memoryaddressor:menaddr|preAddress[12] ; memoryaddressor:menaddr|preAddress[12] ; pclk       ; pclk     ; None                        ; None                      ; 2.076 ns                ;
+; N/A   ; Restricted to 304.04 MHz ( period = 3.289 ns ) ; memoryaddressor:menaddr|preAddress[14] ; memoryaddressor:menaddr|preAddress[14] ; pclk       ; pclk     ; None                        ; None                      ; 2.076 ns                ;
+; N/A   ; Restricted to 304.04 MHz ( period = 3.289 ns ) ; memoryaddressor:menaddr|preAddress[3]  ; memoryaddressor:menaddr|preAddress[3]  ; pclk       ; pclk     ; None                        ; None                      ; 2.075 ns                ;
+; N/A   ; Restricted to 304.04 MHz ( period = 3.289 ns ) ; memoryaddressor:menaddr|preAddress[13] ; memoryaddressor:menaddr|preAddress[13] ; pclk       ; pclk     ; None                        ; None                      ; 2.075 ns                ;
+; N/A   ; Restricted to 304.04 MHz ( period = 3.289 ns ) ; memoryaddressor:menaddr|preAddress[1]  ; memoryaddressor:menaddr|preAddress[1]  ; pclk       ; pclk     ; None                        ; None                      ; 2.066 ns                ;
+; N/A   ; Restricted to 304.04 MHz ( period = 3.289 ns ) ; memoryaddressor:menaddr|preAddress[6]  ; memoryaddressor:menaddr|preAddress[6]  ; pclk       ; pclk     ; None                        ; None                      ; 2.066 ns                ;
+; N/A   ; Restricted to 304.04 MHz ( period = 3.289 ns ) ; memoryaddressor:menaddr|preAddress[11] ; memoryaddressor:menaddr|preAddress[11] ; pclk       ; pclk     ; None                        ; None                      ; 2.057 ns                ;
+; N/A   ; Restricted to 304.04 MHz ( period = 3.289 ns ) ; memoryaddressor:menaddr|preAddress[0]  ; memoryaddressor:menaddr|preAddress[1]  ; pclk       ; pclk     ; None                        ; None                      ; 1.984 ns                ;
+; N/A   ; Restricted to 304.04 MHz ( period = 3.289 ns ) ; memoryaddressor:menaddr|preAddress[7]  ; memoryaddressor:menaddr|preAddress[7]  ; pclk       ; pclk     ; None                        ; None                      ; 1.971 ns                ;
+; N/A   ; Restricted to 304.04 MHz ( period = 3.289 ns ) ; memoryaddressor:menaddr|preAddress[9]  ; memoryaddressor:menaddr|preAddress[9]  ; pclk       ; pclk     ; None                        ; None                      ; 1.962 ns                ;
+; N/A   ; Restricted to 304.04 MHz ( period = 3.289 ns ) ; memoryaddressor:menaddr|preAddress[10] ; memoryaddressor:menaddr|preAddress[10] ; pclk       ; pclk     ; None                        ; None                      ; 1.962 ns                ;
+; N/A   ; Restricted to 304.04 MHz ( period = 3.289 ns ) ; memoryaddressor:menaddr|preAddress[15] ; memoryaddressor:menaddr|preAddress[15] ; pclk       ; pclk     ; None                        ; None                      ; 1.962 ns                ;
+; N/A   ; Restricted to 304.04 MHz ( period = 3.289 ns ) ; memoryaddressor:menaddr|preAddress[8]  ; memoryaddressor:menaddr|preAddress[8]  ; pclk       ; pclk     ; None                        ; None                      ; 1.961 ns                ;
+; N/A   ; Restricted to 304.04 MHz ( period = 3.289 ns ) ; memoryaddressor:menaddr|preAddress[5]  ; memoryaddressor:menaddr|preAddress[5]  ; pclk       ; pclk     ; None                        ; None                      ; 1.953 ns                ;
+; N/A   ; Restricted to 304.04 MHz ( period = 3.289 ns ) ; memoryaddressor:menaddr|preAddress[0]  ; memoryaddressor:menaddr|preAddress[0]  ; pclk       ; pclk     ; None                        ; None                      ; 1.513 ns                ;
++-------+------------------------------------------------+----------------------------------------+----------------------------------------+------------+----------+-----------------------------+---------------------------+-------------------------+
 
 
 +----------------------------------------------------------------------------------------+
@@ -264,71 +280,71 @@ applicable agreement for further details.
 +-------+--------------+------------+------+----------------------------------+----------+
 ; Slack ; Required tsu ; Actual tsu ; From ; To                               ; To Clock ;
 +-------+--------------+------------+------+----------------------------------+----------+
-; N/A   ; None         ; 2.408 ns   ; HREF ; TimingManager:timemanager|Sig_En ; pclk     ;
-; N/A   ; None         ; 1.781 ns   ; HREF ; TimingManager:timemanager|res    ; pclk     ;
+; N/A   ; None         ; -0.670 ns  ; HREF ; TimingManager:timemanager|Sig_En ; pclk     ;
+; N/A   ; None         ; -1.245 ns  ; HREF ; TimingManager:timemanager|res    ; pclk     ;
 +-------+--------------+------------+------+----------------------------------+----------+
 
 
-+------------------------------------------------------------------------------------------------------------------------+
-; tco                                                                                                                    ;
-+-------+--------------+------------+----------------------------------------------------+------------------+------------+
-; Slack ; Required tco ; Actual tco ; From                                               ; To               ; From Clock ;
-+-------+--------------+------------+----------------------------------------------------+------------------+------------+
-; N/A   ; None         ; 14.909 ns  ; memoryaddressor:menaddr|WideCounter:w_count1|q[3]  ; SRAM_address[3]  ; pclk       ;
-; N/A   ; None         ; 14.678 ns  ; memoryaddressor:menaddr|WideCounter:w_count1|q[14] ; SRAM_address[14] ; pclk       ;
-; N/A   ; None         ; 14.400 ns  ; memoryaddressor:menaddr|WideCounter:w_count1|q[13] ; SRAM_address[13] ; pclk       ;
-; N/A   ; None         ; 14.368 ns  ; memoryaddressor:menaddr|WideCounter:w_count1|q[11] ; SRAM_address[11] ; pclk       ;
-; N/A   ; None         ; 14.344 ns  ; memoryaddressor:menaddr|WideCounter:w_count1|q[12] ; SRAM_address[12] ; pclk       ;
-; N/A   ; None         ; 14.268 ns  ; memoryaddressor:menaddr|WideCounter:w_count1|q[0]  ; SRAM_address[0]  ; pclk       ;
-; N/A   ; None         ; 14.158 ns  ; memoryaddressor:menaddr|WideCounter:w_count1|q[15] ; SRAM_address[15] ; pclk       ;
-; N/A   ; None         ; 14.116 ns  ; memoryaddressor:menaddr|WideCounter:w_count1|q[6]  ; SRAM_address[6]  ; pclk       ;
-; N/A   ; None         ; 13.738 ns  ; memoryaddressor:menaddr|WideCounter:w_count1|q[5]  ; SRAM_address[5]  ; pclk       ;
-; N/A   ; None         ; 13.727 ns  ; memoryaddressor:menaddr|WideCounter:w_count1|q[8]  ; SRAM_address[8]  ; pclk       ;
-; N/A   ; None         ; 13.712 ns  ; memoryaddressor:menaddr|WideCounter:w_count1|q[1]  ; SRAM_address[1]  ; pclk       ;
-; N/A   ; None         ; 13.611 ns  ; memoryaddressor:menaddr|WideCounter:w_count1|q[10] ; SRAM_address[10] ; pclk       ;
-; N/A   ; None         ; 13.575 ns  ; memoryaddressor:menaddr|WideCounter:w_count1|q[9]  ; SRAM_address[9]  ; pclk       ;
-; N/A   ; None         ; 13.552 ns  ; memoryaddressor:menaddr|WideCounter:w_count1|q[2]  ; SRAM_address[2]  ; pclk       ;
-; N/A   ; None         ; 13.515 ns  ; memoryaddressor:menaddr|WideCounter:w_count1|q[7]  ; SRAM_address[7]  ; pclk       ;
-; N/A   ; None         ; 13.301 ns  ; memoryaddressor:menaddr|WideCounter:w_count1|q[4]  ; SRAM_address[4]  ; pclk       ;
-; N/A   ; None         ; 12.732 ns  ; clkdivider:clkdivider0|tinyCounter:t_Counter|q[1]  ; xclk             ; clk        ;
-; N/A   ; None         ; 12.380 ns  ; clkdivider:clkdivider0|tinyCounter:t_Counter|q[0]  ; xclk             ; clk        ;
-; N/A   ; None         ; 11.402 ns  ; TimingManager:timemanager|Sig_En                   ; SRAM_address[6]  ; pclk       ;
-; N/A   ; None         ; 11.254 ns  ; TimingManager:timemanager|Sig_En                   ; SRAM_address[3]  ; pclk       ;
-; N/A   ; None         ; 11.109 ns  ; TimingManager:timemanager|Sig_En                   ; WEb              ; pclk       ;
-; N/A   ; None         ; 10.850 ns  ; TimingManager:timemanager|Sig_En                   ; SRAM_address[13] ; pclk       ;
-; N/A   ; None         ; 10.780 ns  ; TimingManager:timemanager|Sig_En                   ; SRAM_address[8]  ; pclk       ;
-; N/A   ; None         ; 10.750 ns  ; TimingManager:timemanager|Sig_En                   ; SRAM_address[12] ; pclk       ;
-; N/A   ; None         ; 10.750 ns  ; TimingManager:timemanager|Sig_En                   ; SRAM_address[11] ; pclk       ;
-; N/A   ; None         ; 10.474 ns  ; TimingManager:timemanager|Sig_En                   ; SRAM_address[1]  ; pclk       ;
-; N/A   ; None         ; 10.329 ns  ; TimingManager:timemanager|Sig_En                   ; BLEb             ; pclk       ;
-; N/A   ; None         ; 10.328 ns  ; TimingManager:timemanager|Sig_En                   ; BHEb             ; pclk       ;
-; N/A   ; None         ; 10.173 ns  ; TimingManager:timemanager|Sig_En                   ; SRAM_address[5]  ; pclk       ;
-; N/A   ; None         ; 10.062 ns  ; TimingManager:timemanager|Sig_En                   ; SRAM_address[2]  ; pclk       ;
-; N/A   ; None         ; 9.964 ns   ; TimingManager:timemanager|Sig_En                   ; SRAM_address[14] ; pclk       ;
-; N/A   ; None         ; 9.964 ns   ; TimingManager:timemanager|Sig_En                   ; SRAM_address[10] ; pclk       ;
-; N/A   ; None         ; 9.964 ns   ; TimingManager:timemanager|Sig_En                   ; SRAM_address[9]  ; pclk       ;
-; N/A   ; None         ; 9.964 ns   ; TimingManager:timemanager|Sig_En                   ; SRAM_address[0]  ; pclk       ;
-; N/A   ; None         ; 9.943 ns   ; TimingManager:timemanager|Sig_En                   ; SRAM_address[15] ; pclk       ;
-; N/A   ; None         ; 9.943 ns   ; TimingManager:timemanager|Sig_En                   ; SRAM_address[7]  ; pclk       ;
-; N/A   ; None         ; 9.732 ns   ; memoryaddressor:menaddr|write_state                ; SRAM_address[6]  ; pclk       ;
-; N/A   ; None         ; 9.584 ns   ; memoryaddressor:menaddr|write_state                ; SRAM_address[3]  ; pclk       ;
-; N/A   ; None         ; 9.528 ns   ; TimingManager:timemanager|Sig_En                   ; SRAM_address[4]  ; pclk       ;
-; N/A   ; None         ; 9.439 ns   ; memoryaddressor:menaddr|write_state                ; WEb              ; pclk       ;
-; N/A   ; None         ; 9.180 ns   ; memoryaddressor:menaddr|write_state                ; SRAM_address[13] ; pclk       ;
-; N/A   ; None         ; 9.110 ns   ; memoryaddressor:menaddr|write_state                ; SRAM_address[8]  ; pclk       ;
-; N/A   ; None         ; 9.080 ns   ; memoryaddressor:menaddr|write_state                ; SRAM_address[12] ; pclk       ;
-; N/A   ; None         ; 9.080 ns   ; memoryaddressor:menaddr|write_state                ; SRAM_address[11] ; pclk       ;
-; N/A   ; None         ; 8.804 ns   ; memoryaddressor:menaddr|write_state                ; SRAM_address[1]  ; pclk       ;
-; N/A   ; None         ; 8.503 ns   ; memoryaddressor:menaddr|write_state                ; SRAM_address[5]  ; pclk       ;
-; N/A   ; None         ; 8.392 ns   ; memoryaddressor:menaddr|write_state                ; SRAM_address[2]  ; pclk       ;
-; N/A   ; None         ; 8.294 ns   ; memoryaddressor:menaddr|write_state                ; SRAM_address[14] ; pclk       ;
-; N/A   ; None         ; 8.294 ns   ; memoryaddressor:menaddr|write_state                ; SRAM_address[10] ; pclk       ;
-; N/A   ; None         ; 8.294 ns   ; memoryaddressor:menaddr|write_state                ; SRAM_address[9]  ; pclk       ;
-; N/A   ; None         ; 8.294 ns   ; memoryaddressor:menaddr|write_state                ; SRAM_address[0]  ; pclk       ;
-; N/A   ; None         ; 8.273 ns   ; memoryaddressor:menaddr|write_state                ; SRAM_address[15] ; pclk       ;
-; N/A   ; None         ; 8.273 ns   ; memoryaddressor:menaddr|write_state                ; SRAM_address[7]  ; pclk       ;
-; N/A   ; None         ; 7.858 ns   ; memoryaddressor:menaddr|write_state                ; SRAM_address[4]  ; pclk       ;
-+-------+--------------+------------+----------------------------------------------------+------------------+------------+
++------------------------------------------------------------------------------------------------------------+
+; tco                                                                                                        ;
++-------+--------------+------------+----------------------------------------+------------------+------------+
+; Slack ; Required tco ; Actual tco ; From                                   ; To               ; From Clock ;
++-------+--------------+------------+----------------------------------------+------------------+------------+
+; N/A   ; None         ; 18.674 ns  ; memoryaddressor:menaddr|preAddress[10] ; SRAM_address[10] ; pclk       ;
+; N/A   ; None         ; 18.217 ns  ; memoryaddressor:menaddr|preAddress[8]  ; SRAM_address[8]  ; pclk       ;
+; N/A   ; None         ; 18.166 ns  ; memoryaddressor:menaddr|preAddress[14] ; SRAM_address[14] ; pclk       ;
+; N/A   ; None         ; 18.117 ns  ; memoryaddressor:menaddr|preAddress[15] ; SRAM_address[15] ; pclk       ;
+; N/A   ; None         ; 18.106 ns  ; memoryaddressor:menaddr|preAddress[6]  ; SRAM_address[6]  ; pclk       ;
+; N/A   ; None         ; 18.081 ns  ; memoryaddressor:menaddr|preAddress[4]  ; SRAM_address[4]  ; pclk       ;
+; N/A   ; None         ; 17.867 ns  ; memoryaddressor:menaddr|preAddress[3]  ; SRAM_address[3]  ; pclk       ;
+; N/A   ; None         ; 17.867 ns  ; memoryaddressor:menaddr|preAddress[2]  ; SRAM_address[2]  ; pclk       ;
+; N/A   ; None         ; 17.846 ns  ; memoryaddressor:menaddr|preAddress[7]  ; SRAM_address[7]  ; pclk       ;
+; N/A   ; None         ; 17.831 ns  ; memoryaddressor:menaddr|preAddress[12] ; SRAM_address[12] ; pclk       ;
+; N/A   ; None         ; 17.822 ns  ; memoryaddressor:menaddr|preAddress[0]  ; SRAM_address[0]  ; pclk       ;
+; N/A   ; None         ; 17.525 ns  ; memoryaddressor:menaddr|preAddress[11] ; SRAM_address[11] ; pclk       ;
+; N/A   ; None         ; 17.422 ns  ; memoryaddressor:menaddr|preAddress[1]  ; SRAM_address[1]  ; pclk       ;
+; N/A   ; None         ; 17.403 ns  ; memoryaddressor:menaddr|preAddress[13] ; SRAM_address[13] ; pclk       ;
+; N/A   ; None         ; 17.360 ns  ; memoryaddressor:menaddr|preAddress[5]  ; SRAM_address[5]  ; pclk       ;
+; N/A   ; None         ; 17.278 ns  ; memoryaddressor:menaddr|preAddress[9]  ; SRAM_address[9]  ; pclk       ;
+; N/A   ; None         ; 15.744 ns  ; TimingManager:timemanager|Sig_En       ; WEb              ; pclk       ;
+; N/A   ; None         ; 14.879 ns  ; TimingManager:timemanager|Sig_En       ; SRAM_address[2]  ; pclk       ;
+; N/A   ; None         ; 14.627 ns  ; TimingManager:timemanager|Sig_En       ; SRAM_address[10] ; pclk       ;
+; N/A   ; None         ; 14.627 ns  ; TimingManager:timemanager|Sig_En       ; SRAM_address[6]  ; pclk       ;
+; N/A   ; None         ; 14.539 ns  ; TimingManager:timemanager|Sig_En       ; SRAM_address[15] ; pclk       ;
+; N/A   ; None         ; 14.539 ns  ; TimingManager:timemanager|Sig_En       ; SRAM_address[14] ; pclk       ;
+; N/A   ; None         ; 14.539 ns  ; TimingManager:timemanager|Sig_En       ; SRAM_address[4]  ; pclk       ;
+; N/A   ; None         ; 14.403 ns  ; TimingManager:timemanager|Sig_En       ; SRAM_address[3]  ; pclk       ;
+; N/A   ; None         ; 14.403 ns  ; TimingManager:timemanager|Sig_En       ; SRAM_address[1]  ; pclk       ;
+; N/A   ; None         ; 14.384 ns  ; TimingManager:timemanager|Sig_En       ; SRAM_address[7]  ; pclk       ;
+; N/A   ; None         ; 14.255 ns  ; TimingManager:timemanager|Sig_En       ; SRAM_address[12] ; pclk       ;
+; N/A   ; None         ; 14.250 ns  ; TimingManager:timemanager|Sig_En       ; SRAM_address[0]  ; pclk       ;
+; N/A   ; None         ; 13.865 ns  ; memoryaddressor:menaddr|write_state    ; WEb              ; pclk       ;
+; N/A   ; None         ; 13.760 ns  ; TimingManager:timemanager|Sig_En       ; SRAM_address[13] ; pclk       ;
+; N/A   ; None         ; 13.760 ns  ; TimingManager:timemanager|Sig_En       ; SRAM_address[9]  ; pclk       ;
+; N/A   ; None         ; 13.760 ns  ; TimingManager:timemanager|Sig_En       ; SRAM_address[5]  ; pclk       ;
+; N/A   ; None         ; 13.641 ns  ; TimingManager:timemanager|Sig_En       ; SRAM_address[8]  ; pclk       ;
+; N/A   ; None         ; 13.460 ns  ; TimingManager:timemanager|Sig_En       ; BLEb             ; pclk       ;
+; N/A   ; None         ; 13.440 ns  ; TimingManager:timemanager|Sig_En       ; Sig_En           ; pclk       ;
+; N/A   ; None         ; 13.440 ns  ; TimingManager:timemanager|Sig_En       ; BHEb             ; pclk       ;
+; N/A   ; None         ; 13.332 ns  ; TimingManager:timemanager|Sig_En       ; SRAM_address[11] ; pclk       ;
+; N/A   ; None         ; 13.000 ns  ; memoryaddressor:menaddr|write_state    ; SRAM_address[2]  ; pclk       ;
+; N/A   ; None         ; 12.748 ns  ; memoryaddressor:menaddr|write_state    ; SRAM_address[10] ; pclk       ;
+; N/A   ; None         ; 12.748 ns  ; memoryaddressor:menaddr|write_state    ; SRAM_address[6]  ; pclk       ;
+; N/A   ; None         ; 12.660 ns  ; memoryaddressor:menaddr|write_state    ; SRAM_address[15] ; pclk       ;
+; N/A   ; None         ; 12.660 ns  ; memoryaddressor:menaddr|write_state    ; SRAM_address[14] ; pclk       ;
+; N/A   ; None         ; 12.660 ns  ; memoryaddressor:menaddr|write_state    ; SRAM_address[4]  ; pclk       ;
+; N/A   ; None         ; 12.524 ns  ; memoryaddressor:menaddr|write_state    ; SRAM_address[3]  ; pclk       ;
+; N/A   ; None         ; 12.524 ns  ; memoryaddressor:menaddr|write_state    ; SRAM_address[1]  ; pclk       ;
+; N/A   ; None         ; 12.505 ns  ; memoryaddressor:menaddr|write_state    ; SRAM_address[7]  ; pclk       ;
+; N/A   ; None         ; 12.376 ns  ; memoryaddressor:menaddr|write_state    ; SRAM_address[12] ; pclk       ;
+; N/A   ; None         ; 12.371 ns  ; memoryaddressor:menaddr|write_state    ; SRAM_address[0]  ; pclk       ;
+; N/A   ; None         ; 11.881 ns  ; memoryaddressor:menaddr|write_state    ; SRAM_address[13] ; pclk       ;
+; N/A   ; None         ; 11.881 ns  ; memoryaddressor:menaddr|write_state    ; SRAM_address[9]  ; pclk       ;
+; N/A   ; None         ; 11.881 ns  ; memoryaddressor:menaddr|write_state    ; SRAM_address[5]  ; pclk       ;
+; N/A   ; None         ; 11.762 ns  ; memoryaddressor:menaddr|write_state    ; SRAM_address[8]  ; pclk       ;
+; N/A   ; None         ; 11.453 ns  ; memoryaddressor:menaddr|write_state    ; SRAM_address[11] ; pclk       ;
+; N/A   ; None         ; 8.940 ns   ; clkdivider:clkdivider0|t_count[1]      ; xclk             ; clk        ;
++-------+--------------+------------+----------------------------------------+------------------+------------+
 
 
 +-----------------------------------------------------------------------+
@@ -336,23 +352,23 @@ applicable agreement for further details.
 +-------+-------------------+-----------------+------+------------------+
 ; Slack ; Required P2P Time ; Actual P2P Time ; From ; To               ;
 +-------+-------------------+-----------------+------+------------------+
-; N/A   ; None              ; 9.356 ns        ; pclk ; SRAM_address[6]  ;
-; N/A   ; None              ; 9.208 ns        ; pclk ; SRAM_address[3]  ;
-; N/A   ; None              ; 9.063 ns        ; pclk ; WEb              ;
-; N/A   ; None              ; 8.804 ns        ; pclk ; SRAM_address[13] ;
-; N/A   ; None              ; 8.734 ns        ; pclk ; SRAM_address[8]  ;
-; N/A   ; None              ; 8.704 ns        ; pclk ; SRAM_address[12] ;
-; N/A   ; None              ; 8.704 ns        ; pclk ; SRAM_address[11] ;
-; N/A   ; None              ; 8.428 ns        ; pclk ; SRAM_address[1]  ;
-; N/A   ; None              ; 8.127 ns        ; pclk ; SRAM_address[5]  ;
-; N/A   ; None              ; 8.016 ns        ; pclk ; SRAM_address[2]  ;
-; N/A   ; None              ; 7.918 ns        ; pclk ; SRAM_address[14] ;
-; N/A   ; None              ; 7.918 ns        ; pclk ; SRAM_address[10] ;
-; N/A   ; None              ; 7.918 ns        ; pclk ; SRAM_address[9]  ;
-; N/A   ; None              ; 7.918 ns        ; pclk ; SRAM_address[0]  ;
-; N/A   ; None              ; 7.897 ns        ; pclk ; SRAM_address[15] ;
-; N/A   ; None              ; 7.897 ns        ; pclk ; SRAM_address[7]  ;
-; N/A   ; None              ; 7.482 ns        ; pclk ; SRAM_address[4]  ;
+; N/A   ; None              ; 10.948 ns       ; pclk ; WEb              ;
+; N/A   ; None              ; 10.083 ns       ; pclk ; SRAM_address[2]  ;
+; N/A   ; None              ; 9.831 ns        ; pclk ; SRAM_address[10] ;
+; N/A   ; None              ; 9.831 ns        ; pclk ; SRAM_address[6]  ;
+; N/A   ; None              ; 9.743 ns        ; pclk ; SRAM_address[15] ;
+; N/A   ; None              ; 9.743 ns        ; pclk ; SRAM_address[14] ;
+; N/A   ; None              ; 9.743 ns        ; pclk ; SRAM_address[4]  ;
+; N/A   ; None              ; 9.607 ns        ; pclk ; SRAM_address[3]  ;
+; N/A   ; None              ; 9.607 ns        ; pclk ; SRAM_address[1]  ;
+; N/A   ; None              ; 9.588 ns        ; pclk ; SRAM_address[7]  ;
+; N/A   ; None              ; 9.459 ns        ; pclk ; SRAM_address[12] ;
+; N/A   ; None              ; 9.454 ns        ; pclk ; SRAM_address[0]  ;
+; N/A   ; None              ; 8.964 ns        ; pclk ; SRAM_address[13] ;
+; N/A   ; None              ; 8.964 ns        ; pclk ; SRAM_address[9]  ;
+; N/A   ; None              ; 8.964 ns        ; pclk ; SRAM_address[5]  ;
+; N/A   ; None              ; 8.845 ns        ; pclk ; SRAM_address[8]  ;
+; N/A   ; None              ; 8.536 ns        ; pclk ; SRAM_address[11] ;
 +-------+-------------------+-----------------+------+------------------+
 
 
@@ -361,8 +377,8 @@ applicable agreement for further details.
 +---------------+-------------+-----------+------+----------------------------------+----------+
 ; Minimum Slack ; Required th ; Actual th ; From ; To                               ; To Clock ;
 +---------------+-------------+-----------+------+----------------------------------+----------+
-; N/A           ; None        ; -1.227 ns ; HREF ; TimingManager:timemanager|res    ; pclk     ;
-; N/A           ; None        ; -1.854 ns ; HREF ; TimingManager:timemanager|Sig_En ; pclk     ;
+; N/A           ; None        ; 1.799 ns  ; HREF ; TimingManager:timemanager|res    ; pclk     ;
+; N/A           ; None        ; 1.224 ns  ; HREF ; TimingManager:timemanager|Sig_En ; pclk     ;
 +---------------+-------------+-----------+------+----------------------------------+----------+
 
 
@@ -371,128 +387,115 @@ applicable agreement for further details.
 +--------------------------+
 Info: *******************************************************************
 Info: Running Quartus II Classic Timing Analyzer
-    Info: Version 9.1 Build 304 01/25/2010 Service Pack 1 SJ Web Edition
-    Info: Processing started: Sat Nov 20 03:52:48 2010
+    Info: Version 10.0 Build 262 08/18/2010 Service Pack 1 SJ Web Edition
+    Info: Processing started: Mon Dec 27 19:45:21 2010
 Info: Command: quartus_tan --read_settings_files=off --write_settings_files=off MemoryaddrBridge -c MemoryaddrBridge
+Warning: Classic Timing Analyzer will not be available in a future release of the Quartus II software. Use the TimeQuest Timing Analyzer to run timing analysis on your design. Convert all the project settings and the timing constraints to TimeQuest Timing Analyzer equivalents.
 Info: Started post-fitting delay annotation
 Info: Delay annotation completed successfully
-Info: Timing Analysis is analyzing one or more registers as latches
-    Info: Register clkdivider:clkdivider0|tinyCounter:t_Counter|q[0] is a latch
-    Info: Register clkdivider:clkdivider0|tinyCounter:t_Counter|q[1] is a latch
-    Info: Register memoryaddressor:menaddr|WideCounter:w_count1|q[0] is a latch
-    Info: Register memoryaddressor:menaddr|WideCounter:w_count1|q[1] is a latch
-    Info: Register memoryaddressor:menaddr|WideCounter:w_count1|q[2] is a latch
-    Info: Register memoryaddressor:menaddr|WideCounter:w_count1|q[3] is a latch
-    Info: Register memoryaddressor:menaddr|WideCounter:w_count1|q[4] is a latch
-    Info: Register memoryaddressor:menaddr|WideCounter:w_count1|q[5] is a latch
-    Info: Register memoryaddressor:menaddr|WideCounter:w_count1|q[6] is a latch
-    Info: Register memoryaddressor:menaddr|WideCounter:w_count1|q[7] is a latch
-    Info: Register memoryaddressor:menaddr|WideCounter:w_count1|q[8] is a latch
-    Info: Register memoryaddressor:menaddr|WideCounter:w_count1|q[9] is a latch
-    Info: Register memoryaddressor:menaddr|WideCounter:w_count1|q[10] is a latch
-    Info: Register memoryaddressor:menaddr|WideCounter:w_count1|q[11] is a latch
-    Info: Register memoryaddressor:menaddr|WideCounter:w_count1|q[12] is a latch
-    Info: Register memoryaddressor:menaddr|WideCounter:w_count1|q[13] is a latch
-    Info: Register memoryaddressor:menaddr|WideCounter:w_count1|q[14] is a latch
-    Info: Register memoryaddressor:menaddr|WideCounter:w_count1|q[15] is a latch
 Warning: Found pins functioning as undefined clocks and/or memory enables
-    Info: Assuming node "clk" is a latch enable. Will not compute fmax for this pin.
+    Info: Assuming node "clk" is an undefined clock
     Info: Assuming node "pclk" is an undefined clock
+    Info: Assuming node "HREF" is an undefined clock
     Info: Assuming node "VSYNC" is an undefined clock
-Warning: Found 2 node(s) in clock paths which may be acting as ripple and/or gated clocks -- node(s) analyzed as buffer(s) resulting in clock skew
+Warning: Found 4 node(s) in clock paths which may be acting as ripple and/or gated clocks -- node(s) analyzed as buffer(s) resulting in clock skew
     Info: Detected ripple clock "TimingManager:timemanager|res" as buffer
+    Info: Detected gated clock "TimingManager:timemanager|always1" as buffer
     Info: Detected ripple clock "TimingManager:timemanager|Sig_En" as buffer
-Info: Clock "clk" has Internal fmax of 228.89 MHz between source register "clkdivider:clkdivider0|tinyCounter:t_Counter|q[1]" and destination register "clkdivider:clkdivider0|tinyCounter:t_Counter|q[1]" (period= 4.369 ns)
-    Info: + Longest register to register delay is 3.660 ns
-        Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LC_X10_Y4_N4; Fanout = 2; REG Node = 'clkdivider:clkdivider0|tinyCounter:t_Counter|q[1]'
-        Info: 2: + IC(0.984 ns) + CELL(0.511 ns) = 1.495 ns; Loc. = LC_X10_Y4_N5; Fanout = 1; COMB Node = 'clkdivider:clkdivider0|tinyCounter:t_Counter|Add0~0'
-        Info: 3: + IC(0.789 ns) + CELL(1.376 ns) = 3.660 ns; Loc. = LC_X10_Y4_N4; Fanout = 2; REG Node = 'clkdivider:clkdivider0|tinyCounter:t_Counter|q[1]'
-        Info: Total cell delay = 1.887 ns ( 51.56 % )
-        Info: Total interconnect delay = 1.773 ns ( 48.44 % )
-    Info: - Smallest clock skew is 0.000 ns
-        Info: + Shortest clock path from clock "clk" to destination register is 5.921 ns
-            Info: 1: + IC(0.000 ns) + CELL(1.132 ns) = 1.132 ns; Loc. = PIN_40; Fanout = 2; CLK Node = 'clk'
-            Info: 2: + IC(2.561 ns) + CELL(2.228 ns) = 5.921 ns; Loc. = LC_X10_Y4_N4; Fanout = 2; REG Node = 'clkdivider:clkdivider0|tinyCounter:t_Counter|q[1]'
-            Info: Total cell delay = 3.360 ns ( 56.75 % )
-            Info: Total interconnect delay = 2.561 ns ( 43.25 % )
-        Info: - Longest clock path from clock "clk" to source register is 5.921 ns
-            Info: 1: + IC(0.000 ns) + CELL(1.132 ns) = 1.132 ns; Loc. = PIN_40; Fanout = 2; CLK Node = 'clk'
-            Info: 2: + IC(2.561 ns) + CELL(2.228 ns) = 5.921 ns; Loc. = LC_X10_Y4_N4; Fanout = 2; REG Node = 'clkdivider:clkdivider0|tinyCounter:t_Counter|q[1]'
-            Info: Total cell delay = 3.360 ns ( 56.75 % )
-            Info: Total interconnect delay = 2.561 ns ( 43.25 % )
-    Info: + Micro clock to output delay of source is 0.376 ns
-    Info: + Micro setup delay of destination is 0.333 ns
-Info: Clock "pclk" has Internal fmax of 67.55 MHz between source register "TimingManager:timemanager|ByteCounter:PixC|q[6]" and destination register "TimingManager:timemanager|Sig_En" (period= 14.804 ns)
+    Info: Detected ripple clock "clkdivider:clkdivider0|t_count[0]" as buffer
+Info: Clock "clk" Internal fmax is restricted to 304.04 MHz between source register "clkdivider:clkdivider0|t_count[0]" and destination register "clkdivider:clkdivider0|t_count[0]"
+    Info: fmax restricted to clock pin edge rate 3.289 ns. Expand message to see actual delay path.
+        Info: + Longest register to register delay is 1.502 ns
+            Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LC_X1_Y5_N2; Fanout = 2; REG Node = 'clkdivider:clkdivider0|t_count[0]'
+            Info: 2: + IC(0.911 ns) + CELL(0.591 ns) = 1.502 ns; Loc. = LC_X1_Y5_N2; Fanout = 2; REG Node = 'clkdivider:clkdivider0|t_count[0]'
+            Info: Total cell delay = 0.591 ns ( 39.35 % )
+            Info: Total interconnect delay = 0.911 ns ( 60.65 % )
+        Info: - Smallest clock skew is 0.000 ns
+            Info: + Shortest clock path from clock "clk" to destination register is 3.302 ns
+                Info: 1: + IC(0.000 ns) + CELL(1.163 ns) = 1.163 ns; Loc. = PIN_12; Fanout = 1; CLK Node = 'clk'
+                Info: 2: + IC(1.221 ns) + CELL(0.918 ns) = 3.302 ns; Loc. = LC_X1_Y5_N2; Fanout = 2; REG Node = 'clkdivider:clkdivider0|t_count[0]'
+                Info: Total cell delay = 2.081 ns ( 63.02 % )
+                Info: Total interconnect delay = 1.221 ns ( 36.98 % )
+            Info: - Longest clock path from clock "clk" to source register is 3.302 ns
+                Info: 1: + IC(0.000 ns) + CELL(1.163 ns) = 1.163 ns; Loc. = PIN_12; Fanout = 1; CLK Node = 'clk'
+                Info: 2: + IC(1.221 ns) + CELL(0.918 ns) = 3.302 ns; Loc. = LC_X1_Y5_N2; Fanout = 2; REG Node = 'clkdivider:clkdivider0|t_count[0]'
+                Info: Total cell delay = 2.081 ns ( 63.02 % )
+                Info: Total interconnect delay = 1.221 ns ( 36.98 % )
+        Info: + Micro clock to output delay of source is 0.376 ns
+        Info: + Micro setup delay of destination is 0.333 ns
+Info: Clock "pclk" has Internal fmax of 55.44 MHz between source register "TimingManager:timemanager|foo[6]" and destination register "TimingManager:timemanager|Sig_En" (period= 18.038 ns)
     Info: + Longest register to register delay is 1.991 ns
-        Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LC_X12_Y3_N9; Fanout = 3; REG Node = 'TimingManager:timemanager|ByteCounter:PixC|q[6]'
-        Info: 2: + IC(0.895 ns) + CELL(0.200 ns) = 1.095 ns; Loc. = LC_X12_Y3_N7; Fanout = 1; COMB Node = 'TimingManager:timemanager|ByteCounter:PixC|Val[6]~0'
-        Info: 3: + IC(0.305 ns) + CELL(0.591 ns) = 1.991 ns; Loc. = LC_X12_Y3_N8; Fanout = 20; REG Node = 'TimingManager:timemanager|Sig_En'
+        Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LC_X9_Y6_N9; Fanout = 3; REG Node = 'TimingManager:timemanager|foo[6]'
+        Info: 2: + IC(0.895 ns) + CELL(0.200 ns) = 1.095 ns; Loc. = LC_X9_Y6_N7; Fanout = 1; COMB Node = 'TimingManager:timemanager|always2~0'
+        Info: 3: + IC(0.305 ns) + CELL(0.591 ns) = 1.991 ns; Loc. = LC_X9_Y6_N8; Fanout = 21; REG Node = 'TimingManager:timemanager|Sig_En'
         Info: Total cell delay = 0.791 ns ( 39.73 % )
         Info: Total interconnect delay = 1.200 ns ( 60.27 % )
-    Info: - Smallest clock skew is -4.702 ns
-        Info: + Shortest clock path from clock "pclk" to destination register is 3.681 ns
-            Info: 1: + IC(0.000 ns) + CELL(1.163 ns) = 1.163 ns; Loc. = PIN_14; Fanout = 12; CLK Node = 'pclk'
-            Info: 2: + IC(1.600 ns) + CELL(0.918 ns) = 3.681 ns; Loc. = LC_X12_Y3_N8; Fanout = 20; REG Node = 'TimingManager:timemanager|Sig_En'
-            Info: Total cell delay = 2.081 ns ( 56.53 % )
-            Info: Total interconnect delay = 1.600 ns ( 43.47 % )
-        Info: - Longest clock path from clock "pclk" to source register is 8.383 ns
-            Info: 1: + IC(0.000 ns) + CELL(1.163 ns) = 1.163 ns; Loc. = PIN_14; Fanout = 12; CLK Node = 'pclk'
-            Info: 2: + IC(1.600 ns) + CELL(1.294 ns) = 4.057 ns; Loc. = LC_X12_Y3_N7; Fanout = 7; REG Node = 'TimingManager:timemanager|res'
-            Info: 3: + IC(3.408 ns) + CELL(0.918 ns) = 8.383 ns; Loc. = LC_X12_Y3_N9; Fanout = 3; REG Node = 'TimingManager:timemanager|ByteCounter:PixC|q[6]'
-            Info: Total cell delay = 3.375 ns ( 40.26 % )
-            Info: Total interconnect delay = 5.008 ns ( 59.74 % )
+    Info: - Smallest clock skew is -6.319 ns
+        Info: + Shortest clock path from clock "pclk" to destination register is 7.529 ns
+            Info: 1: + IC(0.000 ns) + CELL(1.132 ns) = 1.132 ns; Loc. = PIN_8; Fanout = 6; CLK Node = 'pclk'
+            Info: 2: + IC(5.479 ns) + CELL(0.918 ns) = 7.529 ns; Loc. = LC_X9_Y6_N8; Fanout = 21; REG Node = 'TimingManager:timemanager|Sig_En'
+            Info: Total cell delay = 2.050 ns ( 27.23 % )
+            Info: Total interconnect delay = 5.479 ns ( 72.77 % )
+        Info: - Longest clock path from clock "pclk" to source register is 13.848 ns
+            Info: 1: + IC(0.000 ns) + CELL(1.132 ns) = 1.132 ns; Loc. = PIN_8; Fanout = 6; CLK Node = 'pclk'
+            Info: 2: + IC(5.479 ns) + CELL(1.294 ns) = 7.905 ns; Loc. = LC_X9_Y6_N7; Fanout = 1; REG Node = 'TimingManager:timemanager|res'
+            Info: 3: + IC(0.946 ns) + CELL(0.511 ns) = 9.362 ns; Loc. = LC_X9_Y6_N0; Fanout = 7; COMB Node = 'TimingManager:timemanager|always1'
+            Info: 4: + IC(3.568 ns) + CELL(0.918 ns) = 13.848 ns; Loc. = LC_X9_Y6_N9; Fanout = 3; REG Node = 'TimingManager:timemanager|foo[6]'
+            Info: Total cell delay = 3.855 ns ( 27.84 % )
+            Info: Total interconnect delay = 9.993 ns ( 72.16 % )
     Info: + Micro clock to output delay of source is 0.376 ns
     Info: + Micro setup delay of destination is 0.333 ns
     Info: Delay path is controlled by inverted clocks -- if clock duty cycle is 50%, fmax is divided by two
+Info: No valid register-to-register data paths exist for clock "HREF"
 Info: No valid register-to-register data paths exist for clock "VSYNC"
-Info: tsu for register "TimingManager:timemanager|Sig_En" (data pin = "HREF", clock pin = "pclk") is 2.408 ns
-    Info: + Longest pin to register delay is 5.756 ns
-        Info: 1: + IC(0.000 ns) + CELL(1.163 ns) = 1.163 ns; Loc. = PIN_64; Fanout = 10; PIN Node = 'HREF'
-        Info: 2: + IC(2.783 ns) + CELL(0.914 ns) = 4.860 ns; Loc. = LC_X12_Y3_N7; Fanout = 1; COMB Node = 'TimingManager:timemanager|ByteCounter:PixC|Val[6]~0'
-        Info: 3: + IC(0.305 ns) + CELL(0.591 ns) = 5.756 ns; Loc. = LC_X12_Y3_N8; Fanout = 20; REG Node = 'TimingManager:timemanager|Sig_En'
-        Info: Total cell delay = 2.668 ns ( 46.35 % )
-        Info: Total interconnect delay = 3.088 ns ( 53.65 % )
+Info: tsu for register "TimingManager:timemanager|Sig_En" (data pin = "HREF", clock pin = "pclk") is -0.670 ns
+    Info: + Longest pin to register delay is 6.526 ns
+        Info: 1: + IC(0.000 ns) + CELL(1.132 ns) = 1.132 ns; Loc. = PIN_4; Fanout = 11; CLK Node = 'HREF'
+        Info: 2: + IC(3.758 ns) + CELL(0.740 ns) = 5.630 ns; Loc. = LC_X9_Y6_N7; Fanout = 1; COMB Node = 'TimingManager:timemanager|always2~0'
+        Info: 3: + IC(0.305 ns) + CELL(0.591 ns) = 6.526 ns; Loc. = LC_X9_Y6_N8; Fanout = 21; REG Node = 'TimingManager:timemanager|Sig_En'
+        Info: Total cell delay = 2.463 ns ( 37.74 % )
+        Info: Total interconnect delay = 4.063 ns ( 62.26 % )
     Info: + Micro setup delay of destination is 0.333 ns
-    Info: - Shortest clock path from clock "pclk" to destination register is 3.681 ns
-        Info: 1: + IC(0.000 ns) + CELL(1.163 ns) = 1.163 ns; Loc. = PIN_14; Fanout = 12; CLK Node = 'pclk'
-        Info: 2: + IC(1.600 ns) + CELL(0.918 ns) = 3.681 ns; Loc. = LC_X12_Y3_N8; Fanout = 20; REG Node = 'TimingManager:timemanager|Sig_En'
-        Info: Total cell delay = 2.081 ns ( 56.53 % )
-        Info: Total interconnect delay = 1.600 ns ( 43.47 % )
-Info: tco from clock "pclk" to destination pin "SRAM_address[3]" through register "memoryaddressor:menaddr|WideCounter:w_count1|q[3]" is 14.909 ns
-    Info: + Longest clock path from clock "pclk" to source register is 8.300 ns
-        Info: 1: + IC(0.000 ns) + CELL(1.163 ns) = 1.163 ns; Loc. = PIN_14; Fanout = 12; CLK Node = 'pclk'
-        Info: 2: + IC(1.600 ns) + CELL(1.294 ns) = 4.057 ns; Loc. = LC_X12_Y3_N8; Fanout = 20; REG Node = 'TimingManager:timemanager|Sig_En'
-        Info: 3: + IC(2.015 ns) + CELL(2.228 ns) = 8.300 ns; Loc. = LC_X11_Y4_N8; Fanout = 4; REG Node = 'memoryaddressor:menaddr|WideCounter:w_count1|q[3]'
-        Info: Total cell delay = 4.685 ns ( 56.45 % )
-        Info: Total interconnect delay = 3.615 ns ( 43.55 % )
+    Info: - Shortest clock path from clock "pclk" to destination register is 7.529 ns
+        Info: 1: + IC(0.000 ns) + CELL(1.132 ns) = 1.132 ns; Loc. = PIN_8; Fanout = 6; CLK Node = 'pclk'
+        Info: 2: + IC(5.479 ns) + CELL(0.918 ns) = 7.529 ns; Loc. = LC_X9_Y6_N8; Fanout = 21; REG Node = 'TimingManager:timemanager|Sig_En'
+        Info: Total cell delay = 2.050 ns ( 27.23 % )
+        Info: Total interconnect delay = 5.479 ns ( 72.77 % )
+Info: tco from clock "pclk" to destination pin "SRAM_address[10]" through register "memoryaddressor:menaddr|preAddress[10]" is 18.674 ns
+    Info: + Longest clock path from clock "pclk" to source register is 12.690 ns
+        Info: 1: + IC(0.000 ns) + CELL(1.132 ns) = 1.132 ns; Loc. = PIN_8; Fanout = 6; CLK Node = 'pclk'
+        Info: 2: + IC(5.479 ns) + CELL(1.294 ns) = 7.905 ns; Loc. = LC_X9_Y6_N8; Fanout = 21; REG Node = 'TimingManager:timemanager|Sig_En'
+        Info: 3: + IC(3.867 ns) + CELL(0.918 ns) = 12.690 ns; Loc. = LC_X9_Y7_N2; Fanout = 4; REG Node = 'memoryaddressor:menaddr|preAddress[10]'
+        Info: Total cell delay = 3.344 ns ( 26.35 % )
+        Info: Total interconnect delay = 9.346 ns ( 73.65 % )
     Info: + Micro clock to output delay of source is 0.376 ns
-    Info: + Longest register to pin delay is 6.233 ns
-        Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LC_X11_Y4_N8; Fanout = 4; REG Node = 'memoryaddressor:menaddr|WideCounter:w_count1|q[3]'
-        Info: 2: + IC(3.911 ns) + CELL(2.322 ns) = 6.233 ns; Loc. = PIN_5; Fanout = 0; PIN Node = 'SRAM_address[3]'
-        Info: Total cell delay = 2.322 ns ( 37.25 % )
-        Info: Total interconnect delay = 3.911 ns ( 62.75 % )
-Info: Longest tpd from source pin "pclk" to destination pin "SRAM_address[6]" is 9.356 ns
-    Info: 1: + IC(0.000 ns) + CELL(1.163 ns) = 1.163 ns; Loc. = PIN_14; Fanout = 12; CLK Node = 'pclk'
-    Info: 2: + IC(2.373 ns) + CELL(0.740 ns) = 4.276 ns; Loc. = LC_X11_Y4_N4; Fanout = 17; COMB Node = 'memoryaddressor:menaddr|WEb'
-    Info: 3: + IC(3.476 ns) + CELL(1.604 ns) = 9.356 ns; Loc. = PIN_30; Fanout = 0; PIN Node = 'SRAM_address[6]'
-    Info: Total cell delay = 3.507 ns ( 37.48 % )
-    Info: Total interconnect delay = 5.849 ns ( 62.52 % )
-Info: th for register "TimingManager:timemanager|res" (data pin = "HREF", clock pin = "pclk") is -1.227 ns
-    Info: + Longest clock path from clock "pclk" to destination register is 3.681 ns
-        Info: 1: + IC(0.000 ns) + CELL(1.163 ns) = 1.163 ns; Loc. = PIN_14; Fanout = 12; CLK Node = 'pclk'
-        Info: 2: + IC(1.600 ns) + CELL(0.918 ns) = 3.681 ns; Loc. = LC_X12_Y3_N7; Fanout = 7; REG Node = 'TimingManager:timemanager|res'
-        Info: Total cell delay = 2.081 ns ( 56.53 % )
-        Info: Total interconnect delay = 1.600 ns ( 43.47 % )
+    Info: + Longest register to pin delay is 5.608 ns
+        Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LC_X9_Y7_N2; Fanout = 4; REG Node = 'memoryaddressor:menaddr|preAddress[10]'
+        Info: 2: + IC(3.286 ns) + CELL(2.322 ns) = 5.608 ns; Loc. = PIN_30; Fanout = 0; PIN Node = 'SRAM_address[10]'
+        Info: Total cell delay = 2.322 ns ( 41.41 % )
+        Info: Total interconnect delay = 3.286 ns ( 58.59 % )
+Info: Longest tpd from source pin "pclk" to destination pin "WEb" is 10.948 ns
+    Info: 1: + IC(0.000 ns) + CELL(1.132 ns) = 1.132 ns; Loc. = PIN_8; Fanout = 6; CLK Node = 'pclk'
+    Info: 2: + IC(3.711 ns) + CELL(0.740 ns) = 5.583 ns; Loc. = LC_X9_Y4_N2; Fanout = 17; COMB Node = 'memoryaddressor:menaddr|WEb'
+    Info: 3: + IC(3.043 ns) + CELL(2.322 ns) = 10.948 ns; Loc. = PIN_21; Fanout = 0; PIN Node = 'WEb'
+    Info: Total cell delay = 4.194 ns ( 38.31 % )
+    Info: Total interconnect delay = 6.754 ns ( 61.69 % )
+Info: th for register "TimingManager:timemanager|res" (data pin = "HREF", clock pin = "pclk") is 1.799 ns
+    Info: + Longest clock path from clock "pclk" to destination register is 7.529 ns
+        Info: 1: + IC(0.000 ns) + CELL(1.132 ns) = 1.132 ns; Loc. = PIN_8; Fanout = 6; CLK Node = 'pclk'
+        Info: 2: + IC(5.479 ns) + CELL(0.918 ns) = 7.529 ns; Loc. = LC_X9_Y6_N7; Fanout = 1; REG Node = 'TimingManager:timemanager|res'
+        Info: Total cell delay = 2.050 ns ( 27.23 % )
+        Info: Total interconnect delay = 5.479 ns ( 72.77 % )
     Info: + Micro hold delay of destination is 0.221 ns
-    Info: - Shortest pin to register delay is 5.129 ns
-        Info: 1: + IC(0.000 ns) + CELL(1.163 ns) = 1.163 ns; Loc. = PIN_64; Fanout = 10; PIN Node = 'HREF'
-        Info: 2: + IC(2.783 ns) + CELL(1.183 ns) = 5.129 ns; Loc. = LC_X12_Y3_N7; Fanout = 7; REG Node = 'TimingManager:timemanager|res'
-        Info: Total cell delay = 2.346 ns ( 45.74 % )
-        Info: Total interconnect delay = 2.783 ns ( 54.26 % )
-Info: Quartus II Classic Timing Analyzer was successful. 0 errors, 2 warnings
-    Info: Peak virtual memory: 135 megabytes
-    Info: Processing ended: Sat Nov 20 03:52:50 2010
-    Info: Elapsed time: 00:00:02
-    Info: Total CPU time (on all processors): 00:00:02
+    Info: - Shortest pin to register delay is 5.951 ns
+        Info: 1: + IC(0.000 ns) + CELL(1.132 ns) = 1.132 ns; Loc. = PIN_4; Fanout = 11; CLK Node = 'HREF'
+        Info: 2: + IC(3.758 ns) + CELL(1.061 ns) = 5.951 ns; Loc. = LC_X9_Y6_N7; Fanout = 1; REG Node = 'TimingManager:timemanager|res'
+        Info: Total cell delay = 2.193 ns ( 36.85 % )
+        Info: Total interconnect delay = 3.758 ns ( 63.15 % )
+Info: Quartus II Classic Timing Analyzer was successful. 0 errors, 3 warnings
+    Info: Peak virtual memory: 160 megabytes
+    Info: Processing ended: Mon Dec 27 19:45:21 2010
+    Info: Elapsed time: 00:00:00
+    Info: Total CPU time (on all processors): 00:00:00
 
 

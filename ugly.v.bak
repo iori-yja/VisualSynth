@@ -1,0 +1,103 @@
+module TimingManager(input VSYNC, input HREF,input pclk,output reg Sig_En);
+reg [7:0] line = 0;
+reg [7:0] foo = 0;
+reg res,enC;
+initial begin
+	Sig_En <= 1'b1;
+end
+//ByteCounter HrefC (HREF, VSYNC, line[7:0],1'b1);
+//ByteCounter PixC (pclk,res, foo[7:0],enC&HREF);
+	//always @(negedge VSYNC) begin
+//	res<=1'b0;
+//end
+always @(posedge HREF or posedge VSYNC)begin
+  if(HREF == 1'b1)line <= line +1'b1;
+  else line = 8'h00;
+  end
+always @(posedge pclk or posedge res)begin
+  if(pclk == 1'b1)foo <= foo +1'b1;
+  else foo = 8'h00;
+  end
+always @(negedge pclk) begin
+	if(line==8'h20 || line==8'h80 || line==8'hF0) begin
+		enC<=1'b1;
+	end
+	else begin
+		enC<=1'b0;
+	end
+	if(foo[6]==1'b1)begin
+		Sig_En<=1'b1;
+		res<=1'b1;
+	end
+	else begin
+		Sig_En<=1'b0;
+		res<=1'b0;
+	end
+end
+endmodule
+/*
+module ByteCounter(input ck,input res, output [7:0] Val,input enable);
+reg [7:0] q;
+initial q <= 8'h0;
+always @(posedge ck or posedge res) begin
+	if( ck==1'b1 )
+		q<=q+8'h1;
+	else
+		q<=8'h0;
+end
+assign Val = (enable==1'b1) ? q : 8'b0;
+endmodule
+
+module tinyCounter(input ck,input res, output [1:0] Val,input enable);
+reg [1:0] q;
+initial q <= 2'h0;
+always @(posedge ck or posedge res) begin
+	if( ck==1'b1 )
+		q<=q+2'h1;
+	else
+		q<=2'h0;
+end
+assign Val = (enable) ? q : 2'b0;
+endmodule
+
+module WideCounter(input ck,input res, output [15:0] Val,input enable);
+reg [15:0] q ;
+initial q <= 16'h0;
+always @(posedge ck or posedge res) begin
+	if( ck==1'b1 )
+		q<=q+16'h1;
+	else
+		q<=16'h0;
+end
+assign Val = (enable) ? q : 16'b0;
+endmodule*/
+/*
+module TimingManager(input VSYNC, input HREF,input pclk,output reg Sig_En);
+wire [7:0] line,foo;
+reg res,enC;
+initial begin
+	Sig_En <= 1'b1;
+end
+ByteCounter HrefC (HREF, VSYNC, line[7:0],1'b1);
+ByteCounter PixC (pclk,res, foo[7:0],enC&HREF);
+	//always @(negedge VSYNC) begin
+//	res<=1'b0;
+//end
+always @(negedge pclk) begin
+	if(line==8'h20 || line==8'h80 || line==8'hF0) begin
+		enC<=1'b1;
+	end
+	else begin
+		enC<=1'b0;
+	end
+	if(foo[6]==1'b1)begin
+		Sig_En<=1'b1;
+		res<=1'b1;
+	end
+	else begin
+		Sig_En<=1'b0;
+		res<=1'b0;
+	end
+end
+endmodule
+*/

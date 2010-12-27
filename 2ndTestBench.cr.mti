@@ -1,8 +1,16 @@
-/home/ioriveur/Desktop/quartus/TESTBENCH.v {1 {vlog -work work -nocovercells /home/ioriveur/Desktop/quartus/TESTBENCH.v
-Model Technology ModelSim ALTERA vlog 6.5b Compiler 2009.10 Oct  1 2009
+{D:/Documents and Settings/Ior/Desktop/quartusII/TESTBENCH.v} {1 {vlog -work work -nocovercells {D:/Documents and Settings/Ior/Desktop/quartusII/TESTBENCH.v}
+Model Technology ModelSim ALTERA vlog 6.5e Compiler 2010.02 Feb 27 2010
 -- Compiling module TEST
 
 Top level modules:
 	TEST
+
+} {} {}} {D:/Documents and Settings/Ior/Desktop/quartusII/Verilog1.v} {1 {vlog -work work -nocovercells {D:/Documents and Settings/Ior/Desktop/quartusII/Verilog1.v}
+Model Technology ModelSim ALTERA vlog 6.5e Compiler 2010.02 Feb 27 2010
+-- Compiling module clkdivider
+-- Compiling module MemoryaddrBridge
+
+Top level modules:
+	MemoryaddrBridge
 
 } {} {}}

@@ -1,0 +1,18 @@
+Quartus II Archive log --	D:/Documents and Settings/Ior/Desktop/quartusII/MemoryaddrBridge.qarlog
+
+Archive:	D:/Documents and Settings/Ior/Desktop/quartusII/MemoryaddrBridge.qar
+Date:		Sun Dec 26 21:42:26 2010
+Quartus II		10.0 Build 262 08/18/2010 SP 1 SJ Web Edition
+
+	=========== Files Selected: ===========
+D:/Documents and Settings/Ior/Desktop/quartusII/MemoryaddrBridge.dpf
+D:/Documents and Settings/Ior/Desktop/quartusII/MemoryaddrBridge.qpf
+D:/Documents and Settings/Ior/Desktop/quartusII/MemoryaddrBridge.qsf
+D:/Documents and Settings/Ior/Desktop/quartusII/MemoryaddrBridge.sdc
+D:/Documents and Settings/Ior/Desktop/quartusII/MemoryaddrBridge_assignment_defaults.qdf
+D:/Documents and Settings/Ior/Desktop/quartusII/Verilog1.v
+D:/Documents and Settings/Ior/Desktop/quartusII/incremental_db/compiled_partitions/MemoryaddrBridge.db_info
+	======= Total: 7 files to archive =======
+
+	================ Status: ===============
+All files archived successfully.

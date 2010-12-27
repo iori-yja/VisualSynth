@@ -41,7 +41,7 @@ set_global_assignment -name DEVICE EPM570T100C5
 set_global_assignment -name TOP_LEVEL_ENTITY MemoryaddrBridge
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION "9.1 SP2"
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "16:42:44  AUGUST 31, 2010"
-set_global_assignment -name LAST_QUARTUS_VERSION "9.1 SP1"
+set_global_assignment -name LAST_QUARTUS_VERSION "10.0 SP1"
 set_global_assignment -name DEVICE_FILTER_PACKAGE TQFP
 set_global_assignment -name VERILOG_FILE Verilog1.v
 set_global_assignment -name LL_ROOT_REGION ON -section_id "Root Region"
@@ -52,3 +52,14 @@ set_global_assignment -name DEVICE_FILTER_PIN_COUNT 100
 set_global_assignment -name DEVICE_MIGRATION_LIST EPM570T100C5
 set_global_assignment -name STRATIX_DEVICE_IO_STANDARD "3.3-V LVTTL"
 set_global_assignment -name MISC_FILE /home/ioriveur/Desktop/quartus/MemoryaddrBridge.dpf
+set_global_assignment -name MISC_FILE "D:/Documents and Settings/Ior/Desktop/quartusII/MemoryaddrBridge.dpf"
+set_location_assignment PIN_12 -to clk
+set_location_assignment PIN_8 -to pclk
+set_location_assignment PIN_14 -to xclk
+set_location_assignment PIN_6 -to VSYNC
+set_location_assignment PIN_4 -to HREF
+set_global_assignment -name QIP_FILE Queue.qip
+set_global_assignment -name VERILOG_FILE SoundDriver.v
+set_global_assignment -name VERILOG_FILE NewBufctrl.v
+set_global_assignment -name VERILOG_FILE ugly.v
+set_location_assignment PIN_16 -to Sig_En

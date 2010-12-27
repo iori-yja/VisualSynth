@@ -1,0 +1,103 @@
+|MemoryaddrBridge
+clk => clk.IN1
+pclk => pclk.IN2
+HREF => HREF.IN1
+VSYNC => VSYNC.IN1
+xclk <= clkdivider:clkdivider0.port1
+WEb <= memoryaddressor:menaddr.port2
+BLEb <= memoryaddressor:menaddr.port3
+BHEb <= memoryaddressor:menaddr.port4
+SRAM_address[0] <= memoryaddressor:menaddr.port5
+SRAM_address[1] <= memoryaddressor:menaddr.port5
+SRAM_address[2] <= memoryaddressor:menaddr.port5
+SRAM_address[3] <= memoryaddressor:menaddr.port5
+SRAM_address[4] <= memoryaddressor:menaddr.port5
+SRAM_address[5] <= memoryaddressor:menaddr.port5
+SRAM_address[6] <= memoryaddressor:menaddr.port5
+SRAM_address[7] <= memoryaddressor:menaddr.port5
+SRAM_address[8] <= memoryaddressor:menaddr.port5
+SRAM_address[9] <= memoryaddressor:menaddr.port5
+SRAM_address[10] <= memoryaddressor:menaddr.port5
+SRAM_address[11] <= memoryaddressor:menaddr.port5
+SRAM_address[12] <= memoryaddressor:menaddr.port5
+SRAM_address[13] <= memoryaddressor:menaddr.port5
+SRAM_address[14] <= memoryaddressor:menaddr.port5
+SRAM_address[15] <= memoryaddressor:menaddr.port5
+Sig_En <= Sig_En.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|MemoryaddrBridge|TimingManager:timemanager
+VSYNC => line[0].CLK
+VSYNC => line[1].CLK
+VSYNC => line[2].CLK
+VSYNC => line[3].CLK
+VSYNC => line[4].CLK
+VSYNC => line[5].CLK
+VSYNC => line[6].CLK
+VSYNC => line[7].CLK
+HREF => always1.IN1
+HREF => always2.IN1
+HREF => line[0].ALOAD
+HREF => line[1].ALOAD
+HREF => line[2].ALOAD
+HREF => line[3].ALOAD
+HREF => line[4].ALOAD
+HREF => line[5].ALOAD
+HREF => line[6].ALOAD
+HREF => line[7].ALOAD
+pclk => always1.IN1
+pclk => res.CLK
+pclk => Sig_En~reg0.CLK
+pclk => enC.CLK
+Sig_En <= Sig_En~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|MemoryaddrBridge|memoryaddressor:menaddr
+Sig_En => write_state.OUTPUTSELECT
+Sig_En => preAddress[0].CLK
+Sig_En => preAddress[1].CLK
+Sig_En => preAddress[2].CLK
+Sig_En => preAddress[3].CLK
+Sig_En => preAddress[4].CLK
+Sig_En => preAddress[5].CLK
+Sig_En => preAddress[6].CLK
+Sig_En => preAddress[7].CLK
+Sig_En => preAddress[8].CLK
+Sig_En => preAddress[9].CLK
+Sig_En => preAddress[10].CLK
+Sig_En => preAddress[11].CLK
+Sig_En => preAddress[12].CLK
+Sig_En => preAddress[13].CLK
+Sig_En => preAddress[14].CLK
+Sig_En => preAddress[15].CLK
+Sig_En => WEb.IN1
+Sig_En => BLEb.DATAIN
+Sig_En => BHEb.DATAIN
+pclk => WEb.IN1
+pclk => write_state.CLK
+WEb <= WEb.DB_MAX_OUTPUT_PORT_TYPE
+BLEb <= Sig_En.DB_MAX_OUTPUT_PORT_TYPE
+BHEb <= Sig_En.DB_MAX_OUTPUT_PORT_TYPE
+Address[0] <= Address[0].DB_MAX_OUTPUT_PORT_TYPE
+Address[1] <= Address[1].DB_MAX_OUTPUT_PORT_TYPE
+Address[2] <= Address[2].DB_MAX_OUTPUT_PORT_TYPE
+Address[3] <= Address[3].DB_MAX_OUTPUT_PORT_TYPE
+Address[4] <= Address[4].DB_MAX_OUTPUT_PORT_TYPE
+Address[5] <= Address[5].DB_MAX_OUTPUT_PORT_TYPE
+Address[6] <= Address[6].DB_MAX_OUTPUT_PORT_TYPE
+Address[7] <= Address[7].DB_MAX_OUTPUT_PORT_TYPE
+Address[8] <= Address[8].DB_MAX_OUTPUT_PORT_TYPE
+Address[9] <= Address[9].DB_MAX_OUTPUT_PORT_TYPE
+Address[10] <= Address[10].DB_MAX_OUTPUT_PORT_TYPE
+Address[11] <= Address[11].DB_MAX_OUTPUT_PORT_TYPE
+Address[12] <= Address[12].DB_MAX_OUTPUT_PORT_TYPE
+Address[13] <= Address[13].DB_MAX_OUTPUT_PORT_TYPE
+Address[14] <= Address[14].DB_MAX_OUTPUT_PORT_TYPE
+Address[15] <= Address[15].DB_MAX_OUTPUT_PORT_TYPE
+
+
+|MemoryaddrBridge|clkdivider:clkdivider0
+clk => t_count[0].CLK
+xclk <= t_count[1].DB_MAX_OUTPUT_PORT_TYPE
+
+

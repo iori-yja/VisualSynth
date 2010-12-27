@@ -1,0 +1,256 @@
+m255
+K3
+13
+cModel Technology
+d/home/ioriveur/quartus
+vByteCounter
+I;KDT>ffBJ7NEIY<lS5_K42
+V_fCod9QN>[a4N[gmHIeRB2
+Z0 dD:\Documents and Settings\Ior\Desktop\quartusII
+Z1 w1293443248
+Z2 8D:/Documents and Settings/Ior/Desktop/quartusII/Verilog1.v
+Z3 FD:/Documents and Settings/Ior/Desktop/quartusII/Verilog1.v
+L0 1
+Z4 OV;L;6.5e;42
+r1
+31
+Z5 !s102 -nocovercells
+Z6 o-work work -nocovercells -O0
+n@byte@counter
+!s100 XAEW2iAUc;CAhDA52Z=X>3
+!s85 0
+!s101 -O0
+vclkdivider
+I[jbBk1?LUdF5?jMzBzNi[3
+V1zYkLV;gc1i_NbSfSmkJm3
+Z7 dD:\Documents and Settings\Ior\Desktop\quartusII
+Z8 w1293445899
+R2
+R3
+L0 5
+R4
+r1
+31
+R5
+R6
+!s100 =Z9e<H>G0fI^6cD8I>d<l3
+!s85 0
+!s101 -O0
+vCounter
+ID3MoKo4On`n0YDXANCGSd3
+VLOWZi>OFb7XDzlWQbW:iK2
+Z9 d/home/ioriveur/Desktop/quartus
+Z10 w1283690421
+Z11 8/home/ioriveur/Desktop/quartus/Verilog1.v
+Z12 F/home/ioriveur/Desktop/quartus/Verilog1.v
+L0 1
+Z13 OV;L;6.5b;42
+r1
+31
+R5
+R6
+n@counter
+!s100 cLfIf[=IO6FfYM8OK4jR01
+!s85 0
+!s101 -O0
+vHexCounter
+IR1Me0d8kjXbmc7=m[b7IG3
+VhHVJMA?P_A57a^TQdW0SA1
+R9
+R10
+R11
+R12
+L0 13
+R13
+r1
+31
+R5
+R6
+n@hex@counter
+!s100 B;5?A@lRQWfH=06aXNAdn3
+!s85 0
+!s101 -O0
+vInLayer
+I3MWE?H`TM53ilSaFJm8ZY1
+V8Z@Bgf@9T`95`KAQHKPSM1
+R7
+Z14 w1293446533
+Z15 8D:/Documents and Settings/Ior/Desktop/quartusII/NewBufctrl.v
+Z16 FD:/Documents and Settings/Ior/Desktop/quartusII/NewBufctrl.v
+L0 35
+R4
+r1
+31
+R5
+R6
+n@in@layer
+!s100 C2C;Faf7DUfdg`Z>c>oai2
+!s85 0
+!s101 -O0
+vMemoryaddrBridge
+I1o8kd^5LXJ7?NFiAKgnma0
+V_ifb@hb7F@Yj31JBJjzlL3
+R7
+R8
+R2
+R3
+L0 13
+R4
+r1
+31
+R5
+R6
+n@memoryaddr@bridge
+!s100 d8`gF<K0Zde7R1?>zR96A1
+!s85 0
+!s101 -O0
+vmemoryaddressor
+I@T[bBD=^MDMXX61fW1kdN0
+Voc5W6:PX2jPz9MoUIA36A2
+R7
+R14
+R15
+R16
+L0 84
+R4
+r1
+31
+R5
+R6
+!s100 kN_UUA9e75nS?m>0i;i@:0
+!s85 0
+!s101 -O0
+vmusimixer
+IZhj9;d7h0o`2m:ZTgZQW`2
+VVDKAW18icNmCA5;BYi`OT3
+R7
+w1290780955
+R2
+R3
+L0 127
+R4
+r1
+31
+R5
+R6
+!s100 jLa@RXnIEk8IC9=^Q3XIO0
+!s85 0
+!s101 -O0
+vSendbridge
+!s100 CR4bK_h3V1IL05[X@jZWz3
+Id[B>m3@oI[EK[=Gk1mZ>K1
+Vm]aXQS4Af^XoF_E5d@IVG2
+R7
+w1293444394
+8D:/Documents and Settings/Ior/Desktop/quartusII/ugly.v
+FD:/Documents and Settings/Ior/Desktop/quartusII/ugly.v
+L0 3
+R4
+r1
+!s85 0
+31
+!s101 -O0
+R5
+R6
+n@sendbridge
+vTEST
+Iiid22R6hoY=8Db3O0f`zI1
+VbIW=:K5z]3n<z[T1F6BzC2
+R7
+w1292867573
+8D:/Documents and Settings/Ior/Desktop/quartusII/TESTBENCH.v
+FD:/Documents and Settings/Ior/Desktop/quartusII/TESTBENCH.v
+L0 1
+R4
+r1
+31
+R5
+R6
+n@t@e@s@t
+!s100 ^bk5fa?CS2DTCV2W^]TJU1
+!s85 0
+!s101 -O0
+vTimingManager
+InVj7_18YZ_2h67UeY76?Y3
+Vh;C9`O[j>ceb2N;^=NN]50
+R7
+R14
+R15
+R16
+L0 1
+R4
+r1
+31
+R5
+R6
+n@timing@manager
+!s100 l=h5[LFTWoGd^?FF4382m2
+!s85 0
+!s101 -O0
+vtinyCounter
+IW[NKKUWRA[6^5C@YYLlGo0
+V6kD0jMYn9C^gma8:TYVkZ2
+R7
+R1
+R2
+R3
+L0 13
+R4
+r1
+31
+R5
+R6
+ntiny@counter
+!s100 4KC1<IdgEkKHen=jT>Xf02
+!s85 0
+!s101 -O0
+vWideCounter
+Inc`ZBf0Tn2lVzM?Db;0X72
+Vb1ank0[d^K;AUgo`6=V<X3
+R7
+R1
+R2
+R3
+L0 25
+R4
+r1
+31
+R5
+R6
+n@wide@counter
+!s100 FemgiEgjPga<J5CzRXJJm0
+!s85 0
+!s101 -O0
+vymzdriv
+I_5>HiY9`:kaURjhU_XB4>0
+Vfm;hG]9a;h?7[d;TJh0Xj3
+R7
+w1293299168
+R2
+R3
+Z17 L0 102
+R4
+r1
+31
+R5
+R6
+!s100 RcUUX30I;61QPWBPf]Q>R2
+!s85 0
+!s101 -O0
+vYMZdriver
+IAg`[aFGEmm@cWfen`8;oU2
+VASHTIT5mo<ek_7IPdU:O43
+R7
+w1290513028
+R2
+R3
+R17
+R4
+r1
+31
+R5
+R6
+n@y@m@zdriver
+!s100 FICANRR?gHL8_QRKVDRVQ1
+!s85 0
+!s101 -O0

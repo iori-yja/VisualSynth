@@ -1,1 +1,2 @@
-Warning (10268): Verilog HDL information at Verilog1.v(83): always construct contains both blocking and non-blocking assignments
+Warning (10268): Verilog HDL information at NewBufctrl.v(9): always construct contains both blocking and non-blocking assignments
+Warning (10268): Verilog HDL information at NewBufctrl.v(13): always construct contains both blocking and non-blocking assignments
